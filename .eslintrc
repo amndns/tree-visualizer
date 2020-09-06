@@ -30,9 +30,11 @@
   },
   "rules": {
     "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-useless-constructor": "error",
     "linebreak-style": "off",
+    "no-shadow": "off",
     "no-unused-vars": "off",
     "no-useless-constructor": "off",
     "prettier/prettier": "error"
