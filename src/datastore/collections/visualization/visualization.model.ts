@@ -8,12 +8,14 @@ export enum VisualizationAlgorithms {
   PreOrder = 'preorder',
   InOrder = 'inorder',
   PostOrder = 'postorder',
+  Default = LevelOrder,
 }
 
 export enum VisualizationStatus {
+  Idle = 'idle',
   Running = 'running',
   Paused = 'paused',
-  Idle = 'idle',
+  Default = Idle,
 }
 
 export enum VisualizationActionTypes {
