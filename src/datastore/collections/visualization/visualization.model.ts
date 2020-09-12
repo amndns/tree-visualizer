@@ -19,10 +19,7 @@ export enum VisualizationStatus {
 }
 
 export enum VisualizationActionTypes {
-  UpdateAlgorithm = 'UPDATE_ALGORITHM',
-  UpdateStatus = 'UPDATE_STATUS',
-  UpdateTraversalPath = 'UPDATE_TRAVERSAL_PATH',
-  UpdateTraversalPathIndex = 'UPDATE_TRAVERSAL_PATH_INDEX',
+  UpdateVisualization = 'UPDATE_VISUALIZATION',
 }
 
 export interface Traversal {

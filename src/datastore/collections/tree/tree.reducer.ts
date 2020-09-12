@@ -2,12 +2,10 @@ import { Tree, TreeAction, TreeActionTypes } from './tree.model';
 
 const reducer = (state: Tree, action: TreeAction): Tree => {
   switch (action.type) {
-    case TreeActionTypes.UpdateData:
-      return { ...state, data: action.payload.data ?? [] };
-    case TreeActionTypes.UpdateSelectedNodeLoc:
+    case TreeActionTypes.UpdateTree:
       return {
         ...state,
-        selectedNodeLoc: action.payload.selectedNodeLoc ?? null,
+        ...action.payload,
       };
     default:
       return state;

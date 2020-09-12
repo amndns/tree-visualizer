@@ -9,8 +9,7 @@ export enum NodeVisibility {
 }
 
 export enum TreeActionTypes {
-  UpdateData = 'UPDATE_DATA',
-  UpdateSelectedNodeLoc = 'UPDATE_SELECTED_NODE_LOC',
+  UpdateTree = 'UPDATE_TREE',
 }
 
 export interface TreeData {

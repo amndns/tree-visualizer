@@ -2,8 +2,6 @@ import {
   Visualization,
   VisualizationAction,
   VisualizationActionTypes,
-  VisualizationAlgorithms,
-  VisualizationStatus,
 } from './visualization.model';
 
 const reducer = (
@@ -11,25 +9,10 @@ const reducer = (
   action: VisualizationAction
 ): Visualization => {
   switch (action.type) {
-    case VisualizationActionTypes.UpdateAlgorithm:
+    case VisualizationActionTypes.UpdateVisualization:
       return {
         ...state,
-        algorithm: action.payload.algorithm ?? VisualizationAlgorithms.Default,
-      };
-    case VisualizationActionTypes.UpdateStatus:
-      return {
-        ...state,
-        status: action.payload.status ?? VisualizationStatus.Default,
-      };
-    case VisualizationActionTypes.UpdateTraversalPath:
-      return {
-        ...state,
-        traversalPath: action.payload.traversalPath ?? [],
-      };
-    case VisualizationActionTypes.UpdateTraversalPathIndex:
-      return {
-        ...state,
-        traversalPathIndex: action.payload.traversalPathIndex ?? 0,
+        ...action.payload,
       };
     default:
       return state;
