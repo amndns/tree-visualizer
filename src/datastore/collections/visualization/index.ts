@@ -1,2 +1,5 @@
 export { default as visualizationReducer } from './visualization.reducer';
-export { VisualizationActionTypes } from './visualization.model';
+export {
+  initialVisualizationState,
+  updateVisualization,
+} from './visualization.reducer';

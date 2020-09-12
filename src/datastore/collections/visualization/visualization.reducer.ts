@@ -1,11 +1,28 @@
 import {
   Visualization,
   VisualizationAction,
+  VisualizationActionPayload,
   VisualizationActionTypes,
+  VisualizationAlgorithms,
+  VisualizationStatus,
 } from './visualization.model';
 
+export const initialVisualizationState: Visualization = {
+  algorithm: VisualizationAlgorithms.Default,
+  status: VisualizationStatus.Default,
+  traversalPath: [],
+  traversalPathIndex: 0,
+};
+
+export const updateVisualization = (
+  payload: VisualizationActionPayload
+): VisualizationAction => ({
+  type: VisualizationActionTypes.UpdateVisualization,
+  payload,
+});
+
 const reducer = (
-  state: Visualization,
+  state: Visualization = initialVisualizationState,
   action: VisualizationAction
 ): Visualization => {
   switch (action.type) {

@@ -1,6 +1,21 @@
-import { Tree, TreeAction, TreeActionTypes } from './tree.model';
+import {
+  Tree,
+  TreeAction,
+  TreeActionPayload,
+  TreeActionTypes,
+} from './tree.model';
 
-const reducer = (state: Tree, action: TreeAction): Tree => {
+export const initialTreeState: Tree = {
+  data: [],
+  selectedNodeLoc: null,
+};
+
+export const updateTree = (payload: TreeActionPayload): TreeAction => ({
+  type: TreeActionTypes.UpdateTree,
+  payload,
+});
+
+const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
   switch (action.type) {
     case TreeActionTypes.UpdateTree:
       return {

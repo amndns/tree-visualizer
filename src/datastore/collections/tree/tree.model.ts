@@ -1,3 +1,5 @@
+import { ReactD3TreeItem } from 'react-d3-tree';
+
 export enum NodeTypes {
   Node = 'node',
   Plus = 'plus',
@@ -12,20 +14,10 @@ export enum TreeActionTypes {
   UpdateTree = 'UPDATE_TREE',
 }
 
-export interface TreeData {
-  name: string;
+export interface TreeData extends ReactD3TreeItem {
   location: string;
   type: NodeTypes;
-  nodeSvgShape: {
-    shape: string;
-    shapeProps: {
-      r: number;
-      strokeWidth: number;
-      fill: string;
-      visibility: NodeVisibility;
-    };
-  };
-  children: TreeData[];
+  children?: TreeData[];
 }
 
 export interface Tree {

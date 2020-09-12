@@ -3,11 +3,11 @@
 // <App>
 //   <EmptyPlayground></EmptyPlayground>
 //   <TreePlayground>
-//     <OverlayComponent>
+//     <OverlayView>
 //       <DefaultView></DefaultView>
 //       <VisualizationView></VisualizationView>
 //       <NodeUpdateView></NodeUpdateView>
-//     </OverlayComponent>
+//     </OverlayView>
 //     <TreeView>
 //       <Tree></Tree>
 //     </TreeView>
