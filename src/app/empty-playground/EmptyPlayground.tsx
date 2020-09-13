@@ -7,40 +7,14 @@ const EmptyPlayground: FunctionComponent = () => {
   const dummy = {
     name: '1A',
     location: '',
-    type: NodeTypes.Node,
-    children: [
-      {
-        name: '2A',
-        location: '0',
-        type: NodeTypes.Node,
+    type: NodeTypes.Regular,
+    nodeSvgShape: {
+      shape: 'circle',
+      shapeProps: {
+        r: 30,
+        fill: '#FFFFFF',
       },
-      {
-        name: '4A',
-        location: '1',
-        type: NodeTypes.Node,
-        children: [
-          {
-            name: '',
-            location: '01',
-            type: NodeTypes.Plus,
-            nodeSvgShape: {
-              shape: 'circle',
-              shapeProps: {
-                r: 20,
-                strokeWidth: 1,
-                fill: 'transparent',
-                visibility: 'hidden',
-              },
-            },
-          },
-          {
-            name: '6A',
-            location: '11',
-            type: NodeTypes.Node,
-          },
-        ],
-      },
-    ],
+    },
   };
 
   const { dispatch } = useContext(AppContext);

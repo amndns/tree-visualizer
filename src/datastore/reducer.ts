@@ -1,4 +1,4 @@
-import combineReducers from './helpers';
+import combineReducers from './combineReducers';
 import { treeReducer } from './collections/tree';
 import { visualizationReducer } from './collections/visualization';
 
