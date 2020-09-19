@@ -1,4 +1,5 @@
 import cloneDeep from 'lodash-es/cloneDeep';
+
 import {
   NodeChildIndex,
   NodeTypes,
@@ -6,6 +7,7 @@ import {
   PlusNodeName,
   TreeData,
 } from 'datastore/collections/tree/tree.model';
+
 import { PLUS_NODE_SVG_STYLE, SELECTED_NODE_SVG_STYLE } from './constants';
 import {
   checkLeafNode,

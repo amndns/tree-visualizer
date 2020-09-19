@@ -1,7 +1,8 @@
 import React, { FunctionComponent, useContext } from 'react';
+
+import AppContext from 'app/context';
 import { updateTree } from 'datastore/collections/tree';
 import { NodeTypes } from 'datastore/collections/tree/tree.model';
-import AppContext from '../context';
 
 const EmptyPlayground: FunctionComponent = () => {
   const dummy = {

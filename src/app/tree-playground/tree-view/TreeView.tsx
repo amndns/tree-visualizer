@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
+
 import Tree, { ReactD3TreeProps } from 'react-d3-tree';
+
 import { UnionedTreeData } from 'datastore/collections/tree/tree.model';
 import { REGULAR_NODE_SVG_STYLE } from 'helpers/tree';
 

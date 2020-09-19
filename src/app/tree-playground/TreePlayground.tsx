@@ -1,5 +1,8 @@
 import React, { FunctionComponent, useContext } from 'react';
+
 import cloneDeep from 'lodash-es/cloneDeep';
+
+import AppContext from 'app/context';
 import { updateTree } from 'datastore/collections/tree';
 import {
   UnionedTreeData,
@@ -14,7 +17,9 @@ import {
   hidePlusNodesByLocation,
   selectNode,
 } from 'helpers/tree';
-import AppContext from '../context';
+
+import './TreePlayground.scss';
+import DefaultView from './overlay-view/DefaultView';
 import TreeView from './tree-view/TreeView';
 
 const TreePlayground: FunctionComponent = () => {
@@ -80,7 +85,12 @@ const TreePlayground: FunctionComponent = () => {
     }
   };
 
-  return <TreeView data={state.tree.data} onClick={handleClick} />;
+  return (
+    <div className="playground">
+      <DefaultView />
+      <TreeView data={state.tree.data} onClick={handleClick} />
+    </div>
+  );
 };
 
 export default TreePlayground;

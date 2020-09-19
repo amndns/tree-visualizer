@@ -3,6 +3,7 @@ import {
   PlusNodeName,
   TreeData,
 } from 'datastore/collections/tree/tree.model';
+
 import { MAX_TREE_CHILDREN_COUNT } from './constants';
 
 export enum NodeClickActions {

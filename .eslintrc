@@ -34,13 +34,32 @@
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-useless-constructor": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
     "linebreak-style": "off",
     "no-param-reassign": [2, { "props": false }],
     "no-shadow": "off",
     "no-unused-vars": "off",
     "no-useless-constructor": "off",
     "prettier/prettier": "error",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
   },
   "settings": {
     "import/extensions": [".js",".jsx",".ts",".tsx"],

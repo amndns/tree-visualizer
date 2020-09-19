@@ -1,0 +1,83 @@
+@import '~antd/dist/antd.css';
+
+/*
+ * Override the color of the primary button.
+ */
+.ant-btn-primary {
+  background-color: #002766;
+  border-color: #002766;
+
+  &:focus, &:hover {
+    background-color: #002766E0;
+    border-color: #002766E0;
+  }
+}
+
+/*
+ * Override the color of the neutral button.
+ */
+ .neutral.ant-btn-primary {
+  background-color: #0050B3;
+  border-color: #0050B3;
+
+  &:focus, &:hover {
+    background-color: #096DD9;
+    border-color: #096DD9;
+  }
+}
+
+/*
+ * Override the color of the danger button.
+ */
+.danger.ant-btn-primary {
+  background-color: #cf1322;
+  border-color: #cf1322;
+
+  &:focus, &:hover {
+    background-color: #f5222d;
+    border-color: #f5222d;
+  }
+}
+
+/*
+ * Override the color of the positive button.
+ */
+ .positive.ant-btn-primary {
+  background-color: #389E0D;
+  border-color: #389E0D;
+
+  &:focus, &:hover {
+    background-color: #52C41A;
+    border-color: #52C41A;
+  }
+}
+
+/*
+ * Override the color of the dropdown menu left button.
+ */
+.ant-btn-group .ant-btn-primary:last-child:not(:first-child),
+.ant-btn-group .ant-btn-primary + .ant-btn-primary {
+  border-left-color: #AFAFAF;
+}
+
+/*
+ * Override the color of the dropdown menu right button.
+ */
+.ant-btn-group .ant-btn-primary:first-child:not(:last-child) {
+  border-right-color: #AFAFAF;
+}
+
+/*
+ * Override the menu and menu item colors.
+ */
+.ant-dropdown-menu {
+  background-color: #002766;
+
+  &-item {
+    color: #FAFAFA;
+
+    &:focus, &:hover {
+      background-color: #0050b3;
+    }
+  }
+}

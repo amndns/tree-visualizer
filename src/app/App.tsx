@@ -1,7 +1,10 @@
 import React, { FunctionComponent, useMemo, useReducer } from 'react';
-import initialRootState from 'datastore/store';
+
+import AppContext from 'app/context';
 import rootReducer from 'datastore/reducer';
-import AppContext from './context';
+import initialRootState from 'datastore/store';
+
+import './App.scss';
 import EmptyPlayground from './empty-playground/EmptyPlayground';
 import TreePlayground from './tree-playground/TreePlayground';
 
