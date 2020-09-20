@@ -1,0 +1,40 @@
+.overlay {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  
+  &-left {
+    &-input {
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
+      margin-left: 20px;
+      width: 150px;
+    }
+  
+    &-item {
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
+      margin-left: 12px;
+    }
+  }
+
+  &-right-item {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
+    margin-right: 20px;
+  }
+  
+
+
+
+  // &-left {
+  //   &-item, .ant-dropdown-trigger {
+  //     box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
+  //     margin-left: 20px;
+  //   }
+  // }
+
+  // &-right-item {
+  //   box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
+  //   margin-right: 20px;
+  // }
+}

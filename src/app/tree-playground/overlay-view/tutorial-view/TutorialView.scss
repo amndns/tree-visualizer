@@ -1,0 +1,12 @@
+.overlay-bottom-right {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 25%;
+
+  &-item {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
+  }
+}

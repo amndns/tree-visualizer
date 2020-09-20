@@ -15,6 +15,7 @@ export {
 } from './nodeUpdate';
 
 export {
+  MAX_NODE_VALUE_CHAR_COUNT,
   MAX_TREE_CHILDREN_COUNT,
   REGULAR_NODE_SVG_STYLE,
   PLUS_NODE_SVG_STYLE,

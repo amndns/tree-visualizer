@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 
 import Tree, { ReactD3TreeProps } from 'react-d3-tree';
 
@@ -44,6 +44,11 @@ const TreeView: FunctionComponent<TreeViewProps> = ({ data, onClick }) => {
     pathFunc,
   } = DEFAULT_TREE_PROPS;
 
+  const [dimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
   return (
     <Tree
       data={data}
@@ -52,6 +57,10 @@ const TreeView: FunctionComponent<TreeViewProps> = ({ data, onClick }) => {
       orientation={orientation}
       textLayout={TEXT_LAYOUT}
       transitionDuration={transitionDuration}
+      translate={{
+        x: dimensions.width / 2,
+        y: dimensions.height / 3,
+      }}
       onClick={onClick}
       pathFunc={pathFunc}
     />

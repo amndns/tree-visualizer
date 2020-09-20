@@ -4,6 +4,11 @@ import {
 } from 'datastore/collections/tree/tree.model';
 
 /**
+ * Supported character count for tree node value;
+ */
+export const MAX_NODE_VALUE_CHAR_COUNT = 3;
+
+/**
  * Supported tree is only a binary tree.
  */
 export const MAX_TREE_CHILDREN_COUNT = 2;

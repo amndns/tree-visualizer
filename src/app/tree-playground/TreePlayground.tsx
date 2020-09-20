@@ -19,7 +19,7 @@ import {
 } from 'helpers/tree';
 
 import './TreePlayground.scss';
-import DefaultView from './overlay-view/DefaultView';
+import OverlayView from './overlay-view/OverlayView';
 import TreeView from './tree-view/TreeView';
 
 const TreePlayground: FunctionComponent = () => {
@@ -87,7 +87,7 @@ const TreePlayground: FunctionComponent = () => {
 
   return (
     <div className="playground">
-      <DefaultView />
+      <OverlayView playgroundState="DefaultView" />
       <TreeView data={state.tree.data} onClick={handleClick} />
     </div>
   );

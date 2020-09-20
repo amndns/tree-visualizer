@@ -1,6 +1,13 @@
 @import '~antd/dist/antd.css';
 
 /*
+ * Override the background color of the whole component.
+ */
+body {
+  background-color: #F0F5FFA2;
+}
+
+/*
  * Override the color of the primary button.
  */
 .ant-btn-primary {
@@ -80,4 +87,10 @@
       background-color: #0050b3;
     }
   }
+}
+
+.ant-input-group-addon {
+  background-color: #002766;
+  border-color: #002766;
+  color: #D9D9D9;
 }

@@ -15,6 +15,12 @@ export enum NodeVisibility {
   Hidden = 'hidden',
 }
 
+export enum PlaygroundState {
+  DefaultView = 'DefaultView',
+  NodeUpdateView = 'NodeUpdateView',
+  VisualizationView = 'VisualizationView',
+}
+
 export enum PlusNodeName {
   Shown = '+',
   Hidden = '',

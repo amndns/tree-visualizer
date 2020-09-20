@@ -1,0 +1,10 @@
+@import '../default-view/DefaultView.scss';
+
+.overlay-bottom-left {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 75%;
+}
