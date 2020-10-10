@@ -7,7 +7,7 @@ import {
 
 export const initialTreeState: Tree = {
   data: [],
-  selectedNodeLoc: null,
+  selectedNode: null,
 };
 
 export const updateTree = (payload: TreeActionPayload): TreeAction => ({

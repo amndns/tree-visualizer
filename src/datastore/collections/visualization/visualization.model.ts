@@ -11,6 +11,13 @@ export enum VisualizationAlgorithms {
   Default = LevelOrder,
 }
 
+export enum VisualizationSpeed {
+  Fast = 'fast',
+  Average = 'average',
+  Slow = 'slow',
+  Default = Average,
+}
+
 export enum VisualizationStatus {
   Idle = 'idle',
   Running = 'running',
@@ -29,6 +36,7 @@ export interface Traversal {
 
 export interface Visualization {
   algorithm: VisualizationAlgorithms;
+  speed: VisualizationSpeed;
   status: VisualizationStatus;
   traversalPath: Traversal[] | [];
   traversalPathIndex: number;
@@ -36,6 +44,7 @@ export interface Visualization {
 
 export interface VisualizationActionPayload {
   algorithm?: VisualizationAlgorithms;
+  speed?: VisualizationSpeed;
   status?: VisualizationStatus;
   traversalPath?: Traversal[];
   traversalPathIndex?: number;

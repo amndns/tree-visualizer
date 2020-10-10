@@ -14,8 +14,13 @@ export const MAX_NODE_VALUE_CHAR_COUNT = 3;
 export const MAX_TREE_CHILDREN_COUNT = 2;
 
 /**
- * Style for a regular node. Friendly reminder to deep clone
- * the constant to avoid any accidental updates.
+ * Path to the root node.
+ */
+export const ROOT_NODE_LOCATION = '';
+
+/**
+ * Style for an unselected regular node. Friendly reminder to
+ * deep clone the constant to avoid any accidental updates.
  */
 export const REGULAR_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
   shape: 'circle',

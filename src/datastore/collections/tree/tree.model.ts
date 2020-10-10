@@ -15,12 +15,6 @@ export enum NodeVisibility {
   Hidden = 'hidden',
 }
 
-export enum PlaygroundState {
-  DefaultView = 'DefaultView',
-  NodeUpdateView = 'NodeUpdateView',
-  VisualizationView = 'VisualizationView',
-}
-
 export enum PlusNodeName {
   Shown = '+',
   Hidden = '',
@@ -42,20 +36,26 @@ export interface StrictNodeSvgShape extends NodeSvgShape {
 }
 
 export interface TreeData extends ReactD3TreeItem {
+  name: string;
   location: string;
   type: NodeTypes;
   nodeSvgShape: StrictNodeSvgShape;
   children?: TreeData[];
 }
 
+export interface SelectedNode {
+  location: string;
+  name: string;
+}
+
 export interface Tree {
   data: TreeData | [];
-  selectedNodeLoc: string | null;
+  selectedNode: SelectedNode | null;
 }
 
 export interface TreeActionPayload {
-  data?: TreeData;
-  selectedNodeLoc?: string | null;
+  data?: TreeData | [];
+  selectedNode?: SelectedNode | null;
 }
 
 export interface TreeAction {

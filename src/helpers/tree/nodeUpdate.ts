@@ -8,7 +8,11 @@ import {
   TreeData,
 } from 'datastore/collections/tree/tree.model';
 
-import { PLUS_NODE_SVG_STYLE, SELECTED_NODE_SVG_STYLE } from './constants';
+import {
+  PLUS_NODE_SVG_STYLE,
+  REGULAR_NODE_SVG_STYLE,
+  SELECTED_NODE_SVG_STYLE,
+} from './constants';
 import {
   checkLeafNode,
   checkChildrenPlusNodes,
@@ -40,7 +44,7 @@ export const selectNode = (node: TreeData): void => {
 };
 
 /**
- * Create a 'plus' node.
+ * Create a 'plus' node as a child to the current node.
  */
 export const createPlusNode = (
   location: string,
@@ -58,7 +62,7 @@ export const createPlusNode = (
  * being passed as a param.
  */
 export const hidePlusNodeChildren = (node: TreeData): void => {
-  delete node.nodeSvgShape;
+  node.nodeSvgShape = cloneDeep(REGULAR_NODE_SVG_STYLE);
 
   if (!node.children) return;
 
@@ -98,16 +102,12 @@ export const showPlusNodeChildren = (node: TreeData): void => {
 };
 
 /**
- * Create a regular node and add a selection style to it.
+ * Create a regular node.
  */
 export const createRegularNode = (node: TreeData): void => {
   node.name = '1A';
   node.type = NodeTypes.Regular;
-  node.children = [
-    createPlusNode(node.location, NodeChildIndex.Left),
-    createPlusNode(node.location, NodeChildIndex.Right),
-  ];
-  selectNode(node);
+  node.nodeSvgShape = cloneDeep(REGULAR_NODE_SVG_STYLE);
 };
 
 /**
@@ -117,9 +117,9 @@ export const createRegularNode = (node: TreeData): void => {
  */
 export const hidePlusNodesByLocation = (
   root: TreeData,
-  location: string | null
+  location?: string
 ): void => {
-  if (location === null) return;
+  if (location === undefined) return;
 
   const currentNode = getNodeByLocation(root, location);
   hidePlusNodeChildren(currentNode);

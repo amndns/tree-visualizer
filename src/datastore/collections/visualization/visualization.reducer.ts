@@ -4,11 +4,13 @@ import {
   VisualizationActionPayload,
   VisualizationActionTypes,
   VisualizationAlgorithms,
+  VisualizationSpeed,
   VisualizationStatus,
 } from './visualization.model';
 
 export const initialVisualizationState: Visualization = {
   algorithm: VisualizationAlgorithms.Default,
+  speed: VisualizationSpeed.Default,
   status: VisualizationStatus.Default,
   traversalPath: [],
   traversalPathIndex: 0,

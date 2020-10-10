@@ -3,6 +3,8 @@ import React, { FunctionComponent, useContext } from 'react';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 import AppContext from 'app/context';
+import { updatePlayground } from 'datastore/collections/playground';
+import { PlaygroundView } from 'datastore/collections/playground/playground.model';
 import { updateTree } from 'datastore/collections/tree';
 import {
   UnionedTreeData,
@@ -25,10 +27,21 @@ import TreeView from './tree-view/TreeView';
 const TreePlayground: FunctionComponent = () => {
   const { state, dispatch } = useContext(AppContext);
   const {
-    tree: { data, selectedNodeLoc },
+    playground: { playgroundView },
+    tree: { data, selectedNode },
   } = state;
 
-  const handleClick = (node: UnionedTreeData) => {
+  /**
+   * Handle the click action of a node. The click action depends on
+   * the state of the currently selected node. Once the state is
+   * retrieved, one of the following actions is executed:
+   *  - Add a new node
+   *  - Show the hidden plus node/s
+   *  - Hide the plus node/s and
+   *    - Select the current node, or
+   *    - Deselect the current node
+   */
+  const handleClickNode = (node: UnionedTreeData) => {
     const targetNode = node as TreeData;
     const rootNodeClone = cloneDeep(data) as TreeData;
     const currentNode = getNodeByLocation(rootNodeClone, targetNode.location);
@@ -36,46 +49,68 @@ const TreePlayground: FunctionComponent = () => {
     switch (getNodeClickAction(node as TreeData)) {
       case NodeClickActions.AddNewNode:
         createRegularNode(currentNode);
-        hidePlusNodesByLocation(rootNodeClone, selectedNodeLoc ?? null);
         dispatch(
           updateTree({
             data: rootNodeClone,
-            selectedNodeLoc: currentNode.location,
+            selectedNode,
           })
         );
         break;
 
       case NodeClickActions.ShowPlusNodes:
         showPlusNodeChildren(currentNode);
-        if (selectedNodeLoc !== targetNode.location) {
-          hidePlusNodesByLocation(rootNodeClone, selectedNodeLoc ?? null);
+        if (selectedNode?.location !== targetNode.location) {
+          hidePlusNodesByLocation(rootNodeClone, selectedNode?.location);
         }
+        dispatch(
+          updatePlayground({
+            playgroundView: PlaygroundView.NodeUpdate,
+          })
+        );
         dispatch(
           updateTree({
             data: rootNodeClone,
-            selectedNodeLoc: currentNode.location,
+            selectedNode: {
+              name: currentNode.name,
+              location: currentNode.location,
+            },
           })
         );
         break;
 
       case NodeClickActions.HidePlusNodes:
-        hidePlusNodesByLocation(rootNodeClone, selectedNodeLoc ?? null);
+        hidePlusNodesByLocation(rootNodeClone, selectedNode?.location);
 
-        if (selectedNodeLoc === targetNode.location) {
+        // Deselect the currently selected node
+        if (selectedNode?.location === targetNode.location) {
+          dispatch(
+            updatePlayground({
+              playgroundView: PlaygroundView.Default,
+            })
+          );
           dispatch(
             updateTree({
               data: rootNodeClone,
-              selectedNodeLoc: null,
+              selectedNode: null,
             })
           );
           break;
         }
 
+        // Select the currently unselected node
         selectNode(currentNode);
+        dispatch(
+          updatePlayground({
+            playgroundView: PlaygroundView.NodeUpdate,
+          })
+        );
         dispatch(
           updateTree({
             data: rootNodeClone,
-            selectedNodeLoc: currentNode.location,
+            selectedNode: {
+              name: currentNode.name,
+              location: currentNode.location,
+            },
           })
         );
         break;
@@ -87,8 +122,8 @@ const TreePlayground: FunctionComponent = () => {
 
   return (
     <div className="playground">
-      <OverlayView playgroundState="DefaultView" />
-      <TreeView data={state.tree.data} onClick={handleClick} />
+      <OverlayView playgroundView={playgroundView} />
+      <TreeView data={state.tree.data} onClick={handleClickNode} />
     </div>
   );
 };
