@@ -1,3 +1,4 @@
+import { StrictNodeSvgShape } from 'datastore/collections/tree/tree.model';
 import {
   VisualizationAlgorithms,
   VisualizationSpeed,
@@ -20,4 +21,43 @@ export const VISUALIZATION_SPEED_DISPLAY = {
   [VisualizationSpeed.Fast]: 'Fast',
   [VisualizationSpeed.Average]: 'Average',
   [VisualizationSpeed.Slow]: 'Slow',
+};
+
+/**
+ * Visualization speed option to millisecond mapping.
+ */
+export const VISUALIZATION_SPEED_MAPPING = {
+  [VisualizationSpeed.Fast]: 400,
+  [VisualizationSpeed.Average]: 600,
+  [VisualizationSpeed.Slow]: 900,
+};
+
+/**
+ * Style indicator that a node has been explored in the traversal
+ * algorithm. Friendly reminder to deep clone the constant to avoid
+ * any accidental updates.
+ */
+export const EXPLORED_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
+  shape: 'circle',
+  shapeProps: {
+    r: 30,
+    stroke: 'blue', // CHANGE_ME
+    strokeWidth: 10,
+    fill: '#FFFFFF',
+  },
+};
+
+/**
+ * Style indicator that a node has been processed in the traversal
+ * algorithm. Friendly reminder to deep clone the constant to avoid
+ * any accidental updates.
+ */
+export const PROCESSED_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
+  shape: 'circle',
+  shapeProps: {
+    r: 30,
+    stroke: 'green', // CHANGE_ME
+    strokeWidth: 10,
+    fill: '#FFFFFF',
+  },
 };

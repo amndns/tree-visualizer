@@ -1,6 +1,6 @@
 export enum TraversalActions {
-  Visit = 'visit',
-  Print = 'print',
+  Explore = 'explore',
+  Process = 'process',
 }
 
 export enum VisualizationAlgorithms {
@@ -38,7 +38,7 @@ export interface Visualization {
   algorithm: VisualizationAlgorithms;
   speed: VisualizationSpeed;
   status: VisualizationStatus;
-  traversalPath: Traversal[] | [];
+  traversalPath: ReadonlyArray<Traversal> | [];
   traversalPathIndex: number;
 }
 
@@ -46,7 +46,7 @@ export interface VisualizationActionPayload {
   algorithm?: VisualizationAlgorithms;
   speed?: VisualizationSpeed;
   status?: VisualizationStatus;
-  traversalPath?: Traversal[];
+  traversalPath?: ReadonlyArray<Traversal>;
   traversalPathIndex?: number;
 }
 

@@ -29,9 +29,8 @@ import './NodeUpdateView.scss';
 
 const NodeUpdateView: FunctionComponent = () => {
   const { state, dispatch } = useContext(AppContext);
-  const {
-    tree: { data, selectedNode },
-  } = state;
+  const { tree } = state;
+  const { data, selectedNode } = tree;
 
   const [inputValue, setInputValue] = useState(selectedNode?.name ?? '');
 
@@ -53,7 +52,6 @@ const NodeUpdateView: FunctionComponent = () => {
     dispatch(
       updateTree({
         data: rootNodeClone,
-        selectedNode,
       })
     );
   };
@@ -89,9 +87,7 @@ const NodeUpdateView: FunctionComponent = () => {
 
     parentNode.children[currentNodeIndex] = createPlusNode(
       parentLocation,
-      currentNodeIndex === NodeChildIndex.Left
-        ? NodeChildIndex.Left
-        : NodeChildIndex.Right
+      currentNodeIndex as NodeChildIndex
     );
     hidePlusNodesByLocation(rootNodeClone, parentLocation);
 

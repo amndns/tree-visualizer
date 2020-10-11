@@ -9,6 +9,7 @@ export {
 export {
   createPlusNode,
   createRegularNode,
+  deselectNode,
   getNodeByLocation,
   hidePlusNodesByLocation,
   showPlusNodeChildren,

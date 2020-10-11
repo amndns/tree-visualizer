@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent, useContext, useEffect } from 'react';
 
 import cloneDeep from 'lodash-es/cloneDeep';
 
@@ -10,6 +10,12 @@ import {
   UnionedTreeData,
   TreeData,
 } from 'datastore/collections/tree/tree.model';
+import { updateVisualization } from 'datastore/collections/visualization';
+import {
+  TraversalActions,
+  VisualizationStatus,
+} from 'datastore/collections/visualization/visualization.model';
+import './TreePlayground.scss';
 import {
   NodeClickActions,
   createRegularNode,
@@ -19,22 +25,71 @@ import {
   hidePlusNodesByLocation,
   selectNode,
 } from 'helpers/tree';
+import {
+  shouldInitializeAnimation,
+  VISUALIZATION_SPEED_MAPPING,
+  visualizeNode,
+} from 'helpers/visualization';
 
-import './TreePlayground.scss';
 import OverlayView from './overlay-view/OverlayView';
 import TreeView from './tree-view/TreeView';
 
 const TreePlayground: FunctionComponent = () => {
   const { state, dispatch } = useContext(AppContext);
-  const {
-    playground: { playgroundView },
-    tree: { data, selectedNode },
-  } = state;
+  const { playground, tree, visualization } = state;
+  const { playgroundView } = playground;
+  const { data, selectedNode } = tree;
+  const { speed, status, traversalPath, traversalPathIndex } = visualization;
 
   /**
-   * Handle the click action of a node. The click action depends on
-   * the state of the currently selected node. Once the state is
-   * retrieved, one of the following actions is executed:
+   * Main logic for the visualization animation. EXPLAIN..
+   */
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!shouldInitializeAnimation(visualization)) {
+        return;
+      }
+
+      const { location, action } = traversalPath[traversalPathIndex];
+
+      const rootNodeClone = cloneDeep(data) as TreeData;
+      const currentNode = getNodeByLocation(rootNodeClone, location);
+
+      visualizeNode(currentNode, action as TraversalActions);
+
+      dispatch(
+        updateTree({
+          data: rootNodeClone,
+        })
+      );
+      dispatch(
+        updateVisualization({
+          traversalPathIndex: traversalPathIndex + 1,
+        })
+      );
+    }, VISUALIZATION_SPEED_MAPPING[speed]);
+
+    if (!shouldInitializeAnimation(visualization)) {
+      clearTimeout(timer);
+    }
+
+    return () => clearTimeout(timer);
+  }, [
+    dispatch,
+    tree,
+    data,
+    visualization,
+    speed,
+    status,
+    traversalPath,
+    traversalPathIndex,
+  ]);
+
+  /**
+   * Handle the click action of a node. If a visualization animation
+   * is ongoing, the nodes shouldn't be clickable at all. The click
+   * action depends on the state of the currently selected node. Once
+   * the state is retrieved, one of the following actions is executed:
    *  - Add a new node
    *  - Show the hidden plus node/s
    *  - Hide the plus node/s and
@@ -42,6 +97,8 @@ const TreePlayground: FunctionComponent = () => {
    *    - Deselect the current node
    */
   const handleClickNode = (node: UnionedTreeData) => {
+    if (status !== VisualizationStatus.Idle) return;
+
     const targetNode = node as TreeData;
     const rootNodeClone = cloneDeep(data) as TreeData;
     const currentNode = getNodeByLocation(rootNodeClone, targetNode.location);
@@ -52,7 +109,6 @@ const TreePlayground: FunctionComponent = () => {
         dispatch(
           updateTree({
             data: rootNodeClone,
-            selectedNode,
           })
         );
         break;

@@ -44,6 +44,14 @@ export const selectNode = (node: TreeData): void => {
 };
 
 /**
+ * Remove styling from a regular node to indicate a deselection has occurred.
+ * This can also be repurposed as a node style clearing action.
+ */
+export const deselectNode = (node: TreeData): void => {
+  node.nodeSvgShape = cloneDeep(REGULAR_NODE_SVG_STYLE);
+};
+
+/**
  * Create a 'plus' node as a child to the current node.
  */
 export const createPlusNode = (
@@ -57,12 +65,12 @@ export const createPlusNode = (
 });
 
 /**
- * Hide the children 'plus' nodes of the referenced node by updating
- * it. Note that updates here are done by directly modifying the node
- * being passed as a param.
+ * Deselect the referenced node and hide the children 'plus' nodes of
+ * the referenced node by updating it.Note that updates here are done
+ * by directly modifying the node being passed as a param.
  */
 export const hidePlusNodeChildren = (node: TreeData): void => {
-  node.nodeSvgShape = cloneDeep(REGULAR_NODE_SVG_STYLE);
+  deselectNode(node);
 
   if (!node.children) return;
 
@@ -111,9 +119,9 @@ export const createRegularNode = (node: TreeData): void => {
 };
 
 /**
- * Hide the children 'plus' nodes of a node by locating it in the tree and
- * updating the referenced node. Note that updates here are done by directly
- * modifying the root of the tree being passed as a param.
+ * Deselect and hide the children 'plus' nodes of a node by locating it in the
+ * tree and updating the referenced node. Note that updates here are done by
+ * directly modifying the root of the tree being passed as a param.
  */
 export const hidePlusNodesByLocation = (
   root: TreeData,

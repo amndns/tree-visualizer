@@ -4,11 +4,16 @@ import { DeleteOutlined, DownOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Dropdown } from 'antd';
 
 import './DefaultView.scss';
+
 import AppContext from 'app/context';
 import { updatePlayground } from 'datastore/collections/playground';
 import { PlaygroundView } from 'datastore/collections/playground/playground.model';
 import { updateTree } from 'datastore/collections/tree';
+import { TreeData } from 'datastore/collections/tree/tree.model';
+import { updateVisualization } from 'datastore/collections/visualization';
+import { VisualizationStatus } from 'datastore/collections/visualization/visualization.model';
 import {
+  generateTraversalPath,
   VISUALIZATION_ALGORITHMS_DISPLAY,
   VISUALIZATION_SPEED_DISPLAY,
 } from 'helpers/visualization';
@@ -18,9 +23,9 @@ const DefaultView: FunctionComponent<any> = ({
   visualizationMenu,
 }) => {
   const { state, dispatch } = useContext(AppContext);
-  const {
-    visualization: { algorithm, speed },
-  } = state;
+  const { tree, visualization } = state;
+  const { data } = tree;
+  const { algorithm, speed } = visualization;
 
   const handleClearTree = () => {
     dispatch(
@@ -31,11 +36,16 @@ const DefaultView: FunctionComponent<any> = ({
     );
   };
 
-  // TODO: Add visualization logic
   const handleStartVisualization = () => {
     dispatch(
       updatePlayground({
         playgroundView: PlaygroundView.Visualization,
+      })
+    );
+    dispatch(
+      updateVisualization({
+        status: VisualizationStatus.Running,
+        traversalPath: generateTraversalPath(data as TreeData, algorithm),
       })
     );
   };
@@ -79,3 +89,5 @@ const DefaultView: FunctionComponent<any> = ({
 };
 
 export default DefaultView;
+
+// TODO: clean up so that we pass params from parent to all overlay view

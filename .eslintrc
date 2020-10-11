@@ -54,6 +54,7 @@
       }
     ],
     "linebreak-style": "off",
+    "no-continue": "off",
     "no-param-reassign": [2, { "props": false }],
     "no-shadow": "off",
     "no-unused-vars": "off",
