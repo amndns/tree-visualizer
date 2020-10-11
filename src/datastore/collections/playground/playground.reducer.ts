@@ -7,7 +7,7 @@ import {
 } from './playground.model';
 
 export const initialPlaygroundState: Playground = {
-  playgroundView: PlaygroundView.Default,
+  playgroundView: PlaygroundView.Home,
 };
 
 export const updatePlayground = (

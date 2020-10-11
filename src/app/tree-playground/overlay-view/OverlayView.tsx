@@ -11,7 +11,7 @@ import {
   VisualizationSpeed,
 } from 'datastore/collections/visualization/visualization.model';
 
-import DefaultView from './default-view/DefaultView';
+import HomeView from './home-view/HomeView';
 import NodeUpdateView from './node-update-view/NodeUpdateView';
 import TutorialView from './tutorial-view/TutorialView';
 import VisualizationView from './visualization-view/VisualizationView';
@@ -25,6 +25,9 @@ const OverlayView: FunctionComponent<OverlayViewProps> = ({
 }) => {
   const { dispatch } = useContext(AppContext);
 
+  /**
+   * Handles the changing of the visualization speed.
+   */
   const handleSpeedMenuItemClick = ({ key }: any) => {
     dispatch(
       updateVisualization({
@@ -33,6 +36,9 @@ const OverlayView: FunctionComponent<OverlayViewProps> = ({
     );
   };
 
+  /**
+   * Handles the changing of the visualization algorithm.
+   */
   const handleVisualizationMenuItemClick = ({ key }: any) => {
     dispatch(
       updateVisualization({
@@ -90,12 +96,9 @@ const OverlayView: FunctionComponent<OverlayViewProps> = ({
   let overlayViewComponent;
 
   switch (playgroundView) {
-    case PlaygroundView.Default:
+    case PlaygroundView.Home:
       overlayViewComponent = (
-        <DefaultView
-          speedMenu={speedMenu}
-          visualizationMenu={visualizationMenu}
-        />
+        <HomeView speedMenu={speedMenu} visualizationMenu={visualizationMenu} />
       );
       break;
 

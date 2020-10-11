@@ -3,7 +3,7 @@ export enum PlaygroundActionTypes {
 }
 
 export enum PlaygroundView {
-  Default = 'DefaultView',
+  Home = 'HomeView',
   NodeUpdate = 'NodeUpdateView',
   Visualization = 'VisualizationView',
 }

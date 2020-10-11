@@ -30,17 +30,45 @@ import {
 
 const DefaultView: FunctionComponent<any> = ({ speedMenu }) => {
   const { state, dispatch } = useContext(AppContext);
-  const { tree, visualization } = state;
-  const { data } = tree;
   const {
-    algorithm,
-    speed,
-    status,
-    traversalPath,
-    traversalPathIndex,
-  } = visualization;
+    tree: { data },
+    visualization: {
+      algorithm,
+      speed,
+      status,
+      traversalPath,
+      traversalPathIndex,
+    },
+  } = state;
 
+  /**
+   * Handles the replay action during and after the animation.
+   */
+  const handleReplayVisualization = () => {
+    const rootNodeClone = cloneDeep(data) as TreeData;
+    resetTreeNodeStyles(rootNodeClone);
+
+    dispatch(
+      updateTree({
+        data: rootNodeClone,
+      })
+    );
+    dispatch(
+      updateVisualization({
+        status: VisualizationStatus.Running,
+        traversalPathIndex: 0,
+      })
+    );
+  };
+
+  /**
+   * Handles the pause action during the animation. The
+   * assumption is that the animation must be running before
+   * this action can be triggered.
+   */
   const handlePauseVisualization = () => {
+    if (status !== VisualizationStatus.Running) return;
+
     dispatch(
       updateVisualization({
         status: VisualizationStatus.Paused,
@@ -48,7 +76,14 @@ const DefaultView: FunctionComponent<any> = ({ speedMenu }) => {
     );
   };
 
+  /**
+   * Handles the play action during the animation. The
+   * assumption is that the animation must be paused before
+   * this action can be triggered.
+   */
   const handlePlayVisualization = () => {
+    if (status !== VisualizationStatus.Paused) return;
+
     dispatch(
       updateVisualization({
         status: VisualizationStatus.Running,
@@ -56,13 +91,18 @@ const DefaultView: FunctionComponent<any> = ({ speedMenu }) => {
     );
   };
 
+  /**
+   * Handles the stop action during and after the animation.
+   * This action simply exits the visualization view of the
+   * application and resets the tree node styling.
+   */
   const handleStopVisualization = () => {
     const rootNodeClone = cloneDeep(data) as TreeData;
     resetTreeNodeStyles(rootNodeClone);
 
     dispatch(
       updatePlayground({
-        playgroundView: PlaygroundView.Default,
+        playgroundView: PlaygroundView.Home,
       })
     );
     dispatch(
@@ -121,6 +161,7 @@ const DefaultView: FunctionComponent<any> = ({ speedMenu }) => {
             className="overlay-left-item"
             icon={<ReloadOutlined />}
             type="primary"
+            onClick={handleReplayVisualization}
           >
             {`Replay ${VISUALIZATION_ALGORITHMS_DISPLAY[algorithm]}`}
           </Button>

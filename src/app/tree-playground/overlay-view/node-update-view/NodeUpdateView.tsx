@@ -93,7 +93,7 @@ const NodeUpdateView: FunctionComponent = () => {
 
     dispatch(
       updatePlayground({
-        playgroundView: PlaygroundView.Default,
+        playgroundView: PlaygroundView.Home,
       })
     );
     dispatch(
@@ -115,7 +115,7 @@ const NodeUpdateView: FunctionComponent = () => {
 
     dispatch(
       updatePlayground({
-        playgroundView: PlaygroundView.Default,
+        playgroundView: PlaygroundView.Home,
       })
     );
     dispatch(
@@ -139,14 +139,14 @@ const NodeUpdateView: FunctionComponent = () => {
           onChange={handleInputChange}
         />
         <Button
-          className="overlay-left-item"
+          className="overlay-left-compressed-item"
           type="primary"
           onClick={handleEditNode}
         >
           Edit Node
         </Button>
         <Button
-          className="overlay-left-item danger"
+          className="overlay-left-compressed-item danger"
           type="primary"
           onClick={handleDeleteNode}
         >

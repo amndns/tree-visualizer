@@ -12,7 +12,7 @@
       width: 150px;
     }
   
-    &-item {
+    &-compressed-item {
       box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
       margin-left: 12px;
     }
@@ -22,19 +22,4 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
     margin-right: 20px;
   }
-  
-
-
-
-  // &-left {
-  //   &-item, .ant-dropdown-trigger {
-  //     box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
-  //     margin-left: 20px;
-  //   }
-  // }
-
-  // &-right-item {
-  //   box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
-  //   margin-right: 20px;
-  // }
 }

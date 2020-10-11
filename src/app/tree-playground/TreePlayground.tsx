@@ -42,7 +42,12 @@ const TreePlayground: FunctionComponent = () => {
   const { speed, status, traversalPath, traversalPathIndex } = visualization;
 
   /**
-   * Main logic for the visualization animation. EXPLAIN..
+   * Handles the main logic for the visualization animation. The idea
+   * is to use the `useEffect` hook to animate the traversal path of
+   * the algorithm being visualized. For every render of the page,
+   * when the visualization state is valid for animation, a timeout
+   * action is set that will update the styling of a node, thus,
+   * indicating that the node has either been explored or processed.
    */
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -86,7 +91,7 @@ const TreePlayground: FunctionComponent = () => {
   ]);
 
   /**
-   * Handle the click action of a node. If a visualization animation
+   * Handles the click action of a node. If a visualization animation
    * is ongoing, the nodes shouldn't be clickable at all. The click
    * action depends on the state of the currently selected node. Once
    * the state is retrieved, one of the following actions is executed:
@@ -141,7 +146,7 @@ const TreePlayground: FunctionComponent = () => {
         if (selectedNode?.location === targetNode.location) {
           dispatch(
             updatePlayground({
-              playgroundView: PlaygroundView.Default,
+              playgroundView: PlaygroundView.Home,
             })
           );
           dispatch(
@@ -185,3 +190,14 @@ const TreePlayground: FunctionComponent = () => {
 };
 
 export default TreePlayground;
+
+// TODO:
+// [] Add the other algorithms
+// [] Add serialization and deserialization
+// [] Add tutorial modal
+// [] Add empty playground styling
+// [] Add auto-counter for node names
+// [] Finalize styling
+//    [] Change the node styling color
+//    [] Change the tag styling color
+//    [] Other misc

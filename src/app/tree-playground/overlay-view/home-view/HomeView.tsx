@@ -3,7 +3,7 @@ import React, { FunctionComponent, useContext } from 'react';
 import { DeleteOutlined, DownOutlined, SaveOutlined } from '@ant-design/icons';
 import { Button, Dropdown } from 'antd';
 
-import './DefaultView.scss';
+import './HomeView.scss';
 
 import AppContext from 'app/context';
 import { updatePlayground } from 'datastore/collections/playground';
@@ -18,14 +18,12 @@ import {
   VISUALIZATION_SPEED_DISPLAY,
 } from 'helpers/visualization';
 
-const DefaultView: FunctionComponent<any> = ({
-  speedMenu,
-  visualizationMenu,
-}) => {
+const HomeView: FunctionComponent<any> = ({ speedMenu, visualizationMenu }) => {
   const { state, dispatch } = useContext(AppContext);
-  const { tree, visualization } = state;
-  const { data } = tree;
-  const { algorithm, speed } = visualization;
+  const {
+    tree: { data },
+    visualization: { algorithm, speed },
+  } = state;
 
   const handleClearTree = () => {
     dispatch(
@@ -46,6 +44,7 @@ const DefaultView: FunctionComponent<any> = ({
       updateVisualization({
         status: VisualizationStatus.Running,
         traversalPath: generateTraversalPath(data as TreeData, algorithm),
+        traversalPathIndex: 0,
       })
     );
   };
@@ -88,6 +87,4 @@ const DefaultView: FunctionComponent<any> = ({
   );
 };
 
-export default DefaultView;
-
-// TODO: clean up so that we pass params from parent to all overlay view
+export default HomeView;
