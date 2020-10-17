@@ -192,7 +192,7 @@ const TreePlayground: FunctionComponent = () => {
 export default TreePlayground;
 
 // TODO:
-// [] Add the other algorithms
+// [/] Add the other algorithms
 // [] Add serialization and deserialization
 // [] Add tutorial modal
 // [] Add empty playground styling
@@ -201,3 +201,6 @@ export default TreePlayground;
 //    [] Change the node styling color
 //    [] Change the tag styling color
 //    [] Other misc
+
+// OPTIONAL:
+// [] Optimize traversal algorithms (e.g. queue, reverse())
