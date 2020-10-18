@@ -21,6 +21,8 @@ export enum PlusNodeName {
 }
 
 export enum TreeActionTypes {
+  FetchTree = 'FETCH_TREE',
+  SaveTree = 'SAVE_TREE',
   UpdateTree = 'UPDATE_TREE',
 }
 
@@ -60,7 +62,7 @@ export interface TreeActionPayload {
 
 export interface TreeAction {
   type: TreeActionTypes;
-  payload: TreeActionPayload;
+  payload?: TreeActionPayload;
 }
 
 /**

@@ -3,13 +3,13 @@ import cloneDeep from 'lodash-es/cloneDeep';
 import {
   NodeChildIndex,
   NodeTypes,
-  NodeVisibility,
   PlusNodeName,
   TreeData,
 } from 'datastore/collections/tree/tree.model';
 
 import {
-  PLUS_NODE_SVG_STYLE,
+  VISIBLE_PLUS_NODE_SVG_STYLE,
+  HIDDEN_PLUS_NODE_SVG_STYLE,
   REGULAR_NODE_SVG_STYLE,
   SELECTED_NODE_SVG_STYLE,
 } from './constants';
@@ -54,14 +54,13 @@ export const deselectNode = (node: TreeData): void => {
 /**
  * Create a 'plus' node as a child to the current node.
  */
-export const createPlusNode = (
-  location: string,
-  nodeChildIndex: NodeChildIndex
-): TreeData => ({
-  name: PlusNodeName.Shown,
-  location: location + nodeChildIndex,
+export const createPlusNode = (location: string, visible = true): TreeData => ({
+  name: visible ? PlusNodeName.Shown : PlusNodeName.Hidden,
+  location,
   type: NodeTypes.Plus,
-  nodeSvgShape: cloneDeep(PLUS_NODE_SVG_STYLE),
+  nodeSvgShape: visible
+    ? cloneDeep(VISIBLE_PLUS_NODE_SVG_STYLE)
+    : cloneDeep(HIDDEN_PLUS_NODE_SVG_STYLE),
 });
 
 /**
@@ -78,10 +77,10 @@ export const hidePlusNodeChildren = (node: TreeData): void => {
     delete node.children;
   } else if (checkLeftChildPlusNodeOnly(node)) {
     node.children[0].name = PlusNodeName.Hidden;
-    node.children[0].nodeSvgShape.shapeProps.visibility = NodeVisibility.Hidden;
+    node.children[0].nodeSvgShape = cloneDeep(HIDDEN_PLUS_NODE_SVG_STYLE);
   } else if (checkRightChildPlusNodeOnly(node)) {
     node.children[1].name = PlusNodeName.Hidden;
-    node.children[1].nodeSvgShape.shapeProps.visibility = NodeVisibility.Hidden;
+    node.children[1].nodeSvgShape = cloneDeep(HIDDEN_PLUS_NODE_SVG_STYLE);
   }
 };
 
@@ -95,28 +94,36 @@ export const showPlusNodeChildren = (node: TreeData): void => {
 
   if (checkLeafNode(node)) {
     node.children = [
-      createPlusNode(node.location, NodeChildIndex.Left),
-      createPlusNode(node.location, NodeChildIndex.Right),
+      createPlusNode(node.location + NodeChildIndex.Left),
+      createPlusNode(node.location + NodeChildIndex.Right),
     ];
   } else if (!!node.children && checkLeftChildPlusNodeOnly(node)) {
     node.children[0].name = PlusNodeName.Shown;
-    node.children[0].nodeSvgShape.shapeProps.visibility =
-      NodeVisibility.Visible;
+    node.children[0].nodeSvgShape = cloneDeep(VISIBLE_PLUS_NODE_SVG_STYLE);
   } else if (!!node.children && checkRightChildPlusNodeOnly(node)) {
     node.children[1].name = PlusNodeName.Shown;
-    node.children[1].nodeSvgShape.shapeProps.visibility =
-      NodeVisibility.Visible;
+    node.children[1].nodeSvgShape = cloneDeep(VISIBLE_PLUS_NODE_SVG_STYLE);
   }
 };
 
 /**
- * Create a regular node.
+ * Convert the node into a regular node.
  */
-export const createRegularNode = (node: TreeData): void => {
-  node.name = '1A';
+export const convertNodeToRegular = (node: TreeData, name = '1A'): void => {
+  node.name = name;
   node.type = NodeTypes.Regular;
   node.nodeSvgShape = cloneDeep(REGULAR_NODE_SVG_STYLE);
 };
+
+/**
+ * Create a regular root node.
+ */
+export const createRegularNode = (name = '1A', location = ''): TreeData => ({
+  name,
+  location,
+  type: NodeTypes.Regular,
+  nodeSvgShape: cloneDeep(REGULAR_NODE_SVG_STYLE),
+});
 
 /**
  * Deselect and hide the children 'plus' nodes of a node by locating it in the

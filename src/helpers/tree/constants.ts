@@ -31,16 +31,30 @@ export const REGULAR_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
 };
 
 /**
- * Style for a 'plus' node. Friendly reminder to deep clone
- * the constant to avoid any accidental updates.
+ * Style for a visible 'plus' node. Friendly reminder to deep
+ * clone the constant to avoid any accidental updates.
  */
-export const PLUS_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
+export const VISIBLE_PLUS_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
   shape: 'circle',
   shapeProps: {
     r: 20,
     strokeWidth: 1,
     fill: '#FFFFFF',
     visibility: NodeVisibility.Visible,
+  },
+};
+
+/**
+ * Style for a hidden 'plus' node. Friendly reminder to deep
+ * clone the constant to avoid any accidental updates.
+ */
+export const HIDDEN_PLUS_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
+  shape: 'circle',
+  shapeProps: {
+    r: 20,
+    strokeWidth: 1,
+    fill: '#FFFFFF',
+    visibility: NodeVisibility.Hidden,
   },
 };
 

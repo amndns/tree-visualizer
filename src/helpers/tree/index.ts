@@ -7,6 +7,7 @@ export {
 } from './nodeStatus';
 
 export {
+  convertNodeToRegular,
   createPlusNode,
   createRegularNode,
   deselectNode,
@@ -21,6 +22,7 @@ export {
   MAX_TREE_CHILDREN_COUNT,
   REGULAR_NODE_SVG_STYLE,
   ROOT_NODE_LOCATION,
-  PLUS_NODE_SVG_STYLE,
+  VISIBLE_PLUS_NODE_SVG_STYLE,
+  HIDDEN_PLUS_NODE_SVG_STYLE,
   SELECTED_NODE_SVG_STYLE,
 } from './constants';

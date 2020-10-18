@@ -18,7 +18,7 @@ import {
 import './TreePlayground.scss';
 import {
   NodeClickActions,
-  createRegularNode,
+  convertNodeToRegular,
   getNodeByLocation,
   getNodeClickAction,
   showPlusNodeChildren,
@@ -110,7 +110,7 @@ const TreePlayground: FunctionComponent = () => {
 
     switch (getNodeClickAction(node as TreeData)) {
       case NodeClickActions.AddNewNode:
-        createRegularNode(currentNode);
+        convertNodeToRegular(currentNode);
         dispatch(
           updateTree({
             data: rootNodeClone,

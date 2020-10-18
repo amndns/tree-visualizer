@@ -86,8 +86,7 @@ const NodeUpdateView: FunctionComponent = () => {
     if (!parentNode.children) return;
 
     parentNode.children[currentNodeIndex] = createPlusNode(
-      parentLocation,
-      currentNodeIndex as NodeChildIndex
+      parentLocation + (currentNodeIndex as NodeChildIndex)
     );
     hidePlusNodesByLocation(rootNodeClone, parentLocation);
 
