@@ -24,6 +24,7 @@ export enum TreeActionTypes {
   FetchTree = 'FETCH_TREE',
   SaveTree = 'SAVE_TREE',
   UpdateTree = 'UPDATE_TREE',
+  DeleteTree = 'DELETE_TREE',
 }
 
 export interface StrictNodeSvgShape extends NodeSvgShape {

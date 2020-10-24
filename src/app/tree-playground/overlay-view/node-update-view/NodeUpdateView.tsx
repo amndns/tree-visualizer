@@ -12,7 +12,7 @@ import cloneDeep from 'lodash-es/cloneDeep';
 import AppContext from 'app/context';
 import { updatePlayground } from 'datastore/collections/playground';
 import { PlaygroundView } from 'datastore/collections/playground/playground.model';
-import { updateTree } from 'datastore/collections/tree';
+import { updateTree, deleteTree } from 'datastore/collections/tree';
 import {
   NodeChildIndex,
   TreeData,
@@ -75,12 +75,7 @@ const NodeUpdateView: FunctionComponent = () => {
 
     // Clear the tree if the root node is being deleted
     if (selectedNode.location === ROOT_NODE_LOCATION) {
-      dispatch(
-        updateTree({
-          data: [],
-          selectedNode: null,
-        })
-      );
+      dispatch(deleteTree());
       return;
     }
 

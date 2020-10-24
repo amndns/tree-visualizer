@@ -8,7 +8,7 @@ import './HomeView.scss';
 import AppContext from 'app/context';
 import { updatePlayground } from 'datastore/collections/playground';
 import { PlaygroundView } from 'datastore/collections/playground/playground.model';
-import { updateTree } from 'datastore/collections/tree';
+import { saveTree, deleteTree } from 'datastore/collections/tree';
 import { TreeData } from 'datastore/collections/tree/tree.model';
 import { updateVisualization } from 'datastore/collections/visualization';
 import { VisualizationStatus } from 'datastore/collections/visualization/visualization.model';
@@ -25,13 +25,13 @@ const HomeView: FunctionComponent<any> = ({ speedMenu, visualizationMenu }) => {
     visualization: { algorithm, speed },
   } = state;
 
+  // Update reducer, add delete action
   const handleClearTree = () => {
-    dispatch(
-      updateTree({
-        data: [],
-        selectedNode: null,
-      })
-    );
+    dispatch(deleteTree());
+  };
+
+  const handleSaveTree = () => {
+    dispatch(saveTree());
   };
 
   const handleStartVisualization = () => {
@@ -73,6 +73,7 @@ const HomeView: FunctionComponent<any> = ({ speedMenu, visualizationMenu }) => {
           shape="circle"
           size="large"
           type="primary"
+          onClick={handleSaveTree}
         />
         <Button
           className="overlay-right-item danger"

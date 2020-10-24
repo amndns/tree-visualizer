@@ -4,7 +4,7 @@ import {
   TreeActionPayload,
   TreeActionTypes,
 } from './tree.model';
-import { deserializeTreeData } from './tree.transformer';
+import { deserializeTreeData, serializeTreeData } from './tree.transformer';
 
 const TREE_DATA_KEY = 'tree-visualization-data';
 
@@ -26,6 +26,10 @@ export const updateTree = (payload: TreeActionPayload): TreeAction => ({
   payload,
 });
 
+export const deleteTree = (): TreeAction => ({
+  type: TreeActionTypes.DeleteTree,
+});
+
 const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
   switch (action.type) {
     case TreeActionTypes.FetchTree:
@@ -35,7 +39,7 @@ const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
       };
 
     case TreeActionTypes.SaveTree: {
-      localStorage.setItem(TREE_DATA_KEY, 'state.data');
+      localStorage.setItem(TREE_DATA_KEY, serializeTreeData(state.data));
       return state;
     }
 
@@ -44,6 +48,14 @@ const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
         ...state,
         ...action.payload,
       };
+
+    case TreeActionTypes.DeleteTree: {
+      localStorage.removeItem(TREE_DATA_KEY);
+      return {
+        data: [],
+        selectedNode: null,
+      };
+    }
 
     default:
       return state;

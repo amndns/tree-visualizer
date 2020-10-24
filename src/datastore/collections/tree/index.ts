@@ -4,4 +4,5 @@ export {
   fetchTree,
   saveTree,
   updateTree,
+  deleteTree,
 } from './tree.reducer';
