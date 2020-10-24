@@ -7,6 +7,7 @@ import {
   TreeData,
 } from 'datastore/collections/tree/tree.model';
 
+import toNumber from '../utils';
 import {
   VISIBLE_PLUS_NODE_SVG_STYLE,
   HIDDEN_PLUS_NODE_SVG_STYLE,
@@ -31,7 +32,7 @@ export const getNodeByLocation = (
   let currentNode = root;
   location.split('').forEach((path) => {
     if (!currentNode.children) return;
-    currentNode = currentNode.children[parseInt(path, 10)];
+    currentNode = currentNode.children[toNumber(path)];
   });
   return currentNode;
 };
@@ -109,7 +110,7 @@ export const showPlusNodeChildren = (node: TreeData): void => {
 /**
  * Convert the node into a regular node.
  */
-export const convertNodeToRegular = (node: TreeData, name = '1A'): void => {
+export const convertNodeToRegular = (node: TreeData, name = '0'): void => {
   node.name = name;
   node.type = NodeTypes.Regular;
   node.nodeSvgShape = cloneDeep(REGULAR_NODE_SVG_STYLE);
@@ -118,7 +119,7 @@ export const convertNodeToRegular = (node: TreeData, name = '1A'): void => {
 /**
  * Create a regular root node.
  */
-export const createRegularNode = (name = '1A', location = ''): TreeData => ({
+export const createRegularNode = (name = '0', location = ''): TreeData => ({
   name,
   location,
   type: NodeTypes.Regular,

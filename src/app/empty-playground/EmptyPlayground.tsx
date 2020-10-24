@@ -6,7 +6,7 @@ import { NodeTypes } from 'datastore/collections/tree/tree.model';
 
 const EmptyPlayground: FunctionComponent = () => {
   const dummy = {
-    name: '1A',
+    name: '0',
     location: '',
     type: NodeTypes.Regular,
     nodeSvgShape: {

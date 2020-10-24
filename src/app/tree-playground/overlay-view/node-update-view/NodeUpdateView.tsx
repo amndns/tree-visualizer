@@ -24,6 +24,7 @@ import {
   MAX_NODE_VALUE_CHAR_COUNT,
   ROOT_NODE_LOCATION,
 } from 'helpers/tree';
+import toNumber from 'helpers/utils';
 
 import './NodeUpdateView.scss';
 
@@ -39,7 +40,13 @@ const NodeUpdateView: FunctionComponent = () => {
   }, [selectedNode]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+    const { value } = e.target;
+
+    // Check if the value is a natural number
+    const regex = /^([1-9]+\d*|0)$/;
+    if ((!Number.isNaN(+value) && regex.test(value)) || value === '') {
+      setInputValue(e.target.value);
+    }
   };
 
   const handleEditNode = () => {
@@ -48,7 +55,7 @@ const NodeUpdateView: FunctionComponent = () => {
     const rootNodeClone = cloneDeep(data) as TreeData;
     const currentNode = getNodeByLocation(rootNodeClone, selectedNode.location);
 
-    currentNode.name = inputValue;
+    currentNode.name = inputValue.toString();
     dispatch(
       updateTree({
         data: rootNodeClone,
@@ -78,7 +85,7 @@ const NodeUpdateView: FunctionComponent = () => {
     }
 
     const parentLocation = selectedNode.location.slice(0, -1);
-    const currentNodeIndex = parseInt(selectedNode.location.slice(-1), 10);
+    const currentNodeIndex = toNumber(selectedNode.location.slice(-1));
 
     const rootNodeClone = cloneDeep(data) as TreeData;
     const parentNode = getNodeByLocation(rootNodeClone, parentLocation);
@@ -140,6 +147,7 @@ const NodeUpdateView: FunctionComponent = () => {
         <Button
           className="overlay-left-compressed-item"
           type="primary"
+          disabled={inputValue === ''}
           onClick={handleEditNode}
         >
           Edit Node

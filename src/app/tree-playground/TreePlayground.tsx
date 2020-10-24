@@ -198,6 +198,7 @@ export default TreePlayground;
 // [] Add empty playground styling
 // [] Add auto-counter for node names
 // [] Finalize styling
+//    [] Fix scrolling issue
 //    [] Change the node styling color
 //    [] Change the tag styling color
 //    [] Other misc

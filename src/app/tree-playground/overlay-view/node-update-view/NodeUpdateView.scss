@@ -16,6 +16,10 @@
       box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
       margin-left: 12px;
     }
+
+    &-compressed-item[disabled] {
+      box-shadow: rgba(0, 0, 0, 0.20) 0px 2px 8px 0px;
+    }
   }
 
   &-right-item {
