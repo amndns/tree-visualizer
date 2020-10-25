@@ -7,7 +7,7 @@ import {
   TreeData,
 } from 'datastore/collections/tree/tree.model';
 
-import toNumber from '../utils';
+import { toNumber } from '../utils';
 import {
   VISIBLE_PLUS_NODE_SVG_STYLE,
   HIDDEN_PLUS_NODE_SVG_STYLE,

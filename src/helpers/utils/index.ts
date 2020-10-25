@@ -1,4 +1,4 @@
-const toNumber = (value?: string): number => {
+export const toNumber = (value?: string): number => {
   if (value === undefined) return 0;
 
   const result = parseInt(value, 10);
@@ -9,4 +9,11 @@ const toNumber = (value?: string): number => {
   return result;
 };
 
-export default toNumber;
+export const copyToClipboard = (data: string): void => {
+  const dummyInputElement = document.createElement('input');
+  document.body.appendChild(dummyInputElement);
+  dummyInputElement.setAttribute('value', data);
+  dummyInputElement.select();
+  document.execCommand('copy');
+  document.body.removeChild(dummyInputElement);
+};

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from 'react';
 
 import { DeleteOutlined, DownOutlined, SaveOutlined } from '@ant-design/icons';
-import { Button, Dropdown } from 'antd';
+import { Button, Dropdown, notification } from 'antd';
 
 import './HomeView.scss';
 
@@ -18,12 +18,25 @@ import {
   VISUALIZATION_SPEED_DISPLAY,
 } from 'helpers/visualization';
 
+const NOTIFICATION_PLACEMENT = 'bottomLeft';
+const NOTIFICATION_DURATION = 5; // in seconds
+
 const HomeView: FunctionComponent<any> = ({ speedMenu, visualizationMenu }) => {
   const { state, dispatch } = useContext(AppContext);
   const {
     tree: { data },
     visualization: { algorithm, speed },
   } = state;
+
+  const openNotification = (): void => {
+    notification.success({
+      message: `Successfully Saved!`,
+      description: `A copy of the tree has been saved on your browser. The LeetCode array
+        version of the tree has also been copied to your clipboard!`,
+      duration: NOTIFICATION_DURATION,
+      placement: NOTIFICATION_PLACEMENT,
+    });
+  };
 
   // Update reducer, add delete action
   const handleClearTree = () => {
@@ -32,6 +45,7 @@ const HomeView: FunctionComponent<any> = ({ speedMenu, visualizationMenu }) => {
 
   const handleSaveTree = () => {
     dispatch(saveTree());
+    openNotification();
   };
 
   const handleStartVisualization = () => {

@@ -1,3 +1,5 @@
+import { copyToClipboard } from 'helpers/utils';
+
 import {
   Tree,
   TreeAction,
@@ -39,7 +41,9 @@ const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
       };
 
     case TreeActionTypes.SaveTree: {
-      localStorage.setItem(TREE_DATA_KEY, serializeTreeData(state.data));
+      const [serializedTree, leetcodeTree] = serializeTreeData(state.data);
+      localStorage.setItem(TREE_DATA_KEY, serializedTree);
+      copyToClipboard(leetcodeTree);
       return state;
     }
 

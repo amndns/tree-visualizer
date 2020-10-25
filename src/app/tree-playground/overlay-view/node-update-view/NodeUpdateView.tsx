@@ -24,7 +24,7 @@ import {
   MAX_NODE_VALUE_CHAR_COUNT,
   ROOT_NODE_LOCATION,
 } from 'helpers/tree';
-import toNumber from 'helpers/utils';
+import { toNumber } from 'helpers/utils';
 
 import './NodeUpdateView.scss';
 

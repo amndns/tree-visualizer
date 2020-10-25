@@ -1,5 +1,5 @@
 import { createPlusNode, createRegularNode } from 'helpers/tree';
-import toNumber from 'helpers/utils';
+import { toNumber } from 'helpers/utils';
 
 import { NodeChildIndex, NodeTypes, TreeData } from './tree.model';
 
@@ -7,9 +7,10 @@ type TreeDataArray = (number | null)[];
 
 /**
  * Checks if the input tree data array is valid. A tree data array
- * is the LeetCode style flattened version of the tree data. This
- * array contains the node values of the tree data in level-order
- * sequence (including the null values of the tree).
+ * is the flattened version of the tree data. This array contains the
+ * node values of the tree data in level-order sequence, including the
+ * `null` values of the tree. A `null` value signifies that a node does
+ * not exist in the position.
  */
 const isValidTreeDataArray = (treeDataArray: TreeDataArray[]) =>
   Array.isArray(treeDataArray) &&
@@ -20,15 +21,37 @@ const isValidTreeDataArray = (treeDataArray: TreeDataArray[]) =>
  * Prunes the suffix null values of tree data array.
  */
 const pruneTreeDataArray = (treeDataArray: TreeDataArray): TreeDataArray => {
-  let nodeIdx = treeDataArray.length - 1;
+  const prunedTreeDataArray = [...treeDataArray];
+  let nodeIdx = prunedTreeDataArray.length - 1;
 
   while (nodeIdx >= 0) {
-    if (treeDataArray[nodeIdx] !== null) break;
-    treeDataArray.pop();
+    if (prunedTreeDataArray[nodeIdx] !== null) break;
+    prunedTreeDataArray.pop();
     nodeIdx -= 1;
   }
 
-  return treeDataArray;
+  return prunedTreeDataArray;
+};
+/**
+ * Generates the LeetCode version of the tree data array from the original
+ * tree data array used in this application. The LeetCode version is similar
+ * to the tree data array version except the `null` value signifies a path
+ * terminator (i.e. no node exists below) instead of it signifying a
+ * non-existent node in the position.
+ */
+const leetcodifyTreeDataArray = (treeDataArray: TreeDataArray) => {
+  const leetcodeTreeDataArray = [...treeDataArray];
+  let nodeIdx = leetcodeTreeDataArray.length - 1;
+
+  while (nodeIdx >= 0) {
+    const parentIdx = Math.floor((nodeIdx - 1) / 2);
+    if (leetcodeTreeDataArray[parentIdx] === null) {
+      leetcodeTreeDataArray.splice(nodeIdx, 1);
+    }
+    nodeIdx -= 1;
+  }
+
+  return pruneTreeDataArray(leetcodeTreeDataArray);
 };
 
 /**
@@ -94,10 +117,15 @@ export const deserializeTreeData = (
  * serialization is achieved by traversing the tree in a level-order
  * manner and then pushing them into the tree data array. The complex
  * part is identifying the amount of null values to push in between
- * node values in the tree data array.
+ * node values in the tree data array. Moreover, the LeetCode version of
+ * the tree data array is also returned along with the original tree data
+ * array. This allows the app to copy the LeetCode version of the tree
+ * into the user's clipboard for LeetCode use.
  */
-export const serializeTreeData = (treeData: TreeData | []): string => {
-  if (treeData === []) return '[]';
+export const serializeTreeData = (
+  treeData: TreeData | []
+): [string, string] => {
+  if (treeData === []) return ['[]', '[]'];
 
   let treeDataArray: TreeDataArray = [];
   let treeLevel = 0;
@@ -155,6 +183,8 @@ export const serializeTreeData = (treeData: TreeData | []): string => {
     treeLevel += 1;
   }
 
-  pruneTreeDataArray(treeDataArray);
-  return JSON.stringify(treeDataArray);
+  return [
+    JSON.stringify(pruneTreeDataArray(treeDataArray)),
+    JSON.stringify(leetcodifyTreeDataArray(treeDataArray)),
+  ];
 };
