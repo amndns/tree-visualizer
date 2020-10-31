@@ -1,10 +1,14 @@
 import React, { FunctionComponent, useContext } from 'react';
 
+import { Empty } from 'antd';
+
 import AppContext from 'app/context';
 import { updatePlayground } from 'datastore/collections/playground';
 import { PlaygroundView } from 'datastore/collections/playground/playground.model';
 import { updateTree } from 'datastore/collections/tree';
 import { NodeTypes } from 'datastore/collections/tree/tree.model';
+
+import './EmptyPlayground.scss';
 
 const EmptyPlayground: FunctionComponent = () => {
   const dummy = {
@@ -22,16 +26,29 @@ const EmptyPlayground: FunctionComponent = () => {
 
   const { dispatch } = useContext(AppContext);
 
-  const handleClick = () => {
+  const handleCreateTree = () => {
     dispatch(updateTree({ data: dummy }));
     dispatch(updatePlayground({ playgroundView: PlaygroundView.Home }));
   };
 
   return (
-    <div>
-      <div>Empty Playground</div>
-      <button onClick={handleClick} type="button">
-        Create New Tree
+    <div className="empty-playground">
+      <button
+        className="empty-playground-button"
+        type="button"
+        onClick={handleCreateTree}
+      >
+        <Empty
+          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          imageStyle={{
+            height: 135,
+          }}
+          description={
+            <span className="empty-playground-description">
+              Click to add root node.
+            </span>
+          }
+        />
       </button>
     </div>
   );

@@ -188,3 +188,27 @@ export const serializeTreeData = (
     JSON.stringify(leetcodifyTreeDataArray(treeDataArray)),
   ];
 };
+
+/**
+ * Handles the deserialization of the node value counter. This method
+ * returns 0 by default when an exception occurs or when the serialized
+ * node counter value is invalid.
+ */
+export const deserializeNodeCounter = (
+  serializedNodeCounter: string | null
+): number => {
+  if (serializedNodeCounter === null) return 0;
+
+  try {
+    return toNumber(serializedNodeCounter);
+  } catch (e) {
+    return 0;
+  }
+};
+
+/**
+ * Handles the serialization of the node value counter.
+ */
+export const serializeNodeCounter = (nodeCounter: number): string => {
+  return JSON.stringify(nodeCounter);
+};

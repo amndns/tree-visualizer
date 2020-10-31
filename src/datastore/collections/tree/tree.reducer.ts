@@ -6,13 +6,20 @@ import {
   TreeActionPayload,
   TreeActionTypes,
 } from './tree.model';
-import { deserializeTreeData, serializeTreeData } from './tree.transformer';
+import {
+  deserializeNodeCounter,
+  deserializeTreeData,
+  serializeNodeCounter,
+  serializeTreeData,
+} from './tree.transformer';
 
 const TREE_DATA_KEY = 'tree-visualization-data';
+const TREE_NODE_COUNTER_KEY = 'tree-node-counter';
 
 export const initialTreeState: Tree = {
   data: [],
   selectedNode: null,
+  nodeCounter: 0,
 };
 
 export const fetchTree = (): TreeAction => ({
@@ -38,11 +45,16 @@ const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
       return {
         ...state,
         data: deserializeTreeData(localStorage.getItem(TREE_DATA_KEY)),
+        nodeCounter: deserializeNodeCounter(
+          localStorage.getItem(TREE_NODE_COUNTER_KEY)
+        ),
       };
 
     case TreeActionTypes.SaveTree: {
       const [serializedTree, leetcodeTree] = serializeTreeData(state.data);
+      const serializedNodeCounter = serializeNodeCounter(state.nodeCounter);
       localStorage.setItem(TREE_DATA_KEY, serializedTree);
+      localStorage.setItem(TREE_NODE_COUNTER_KEY, serializedNodeCounter);
       copyToClipboard(leetcodeTree);
       return state;
     }
@@ -55,10 +67,7 @@ const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
 
     case TreeActionTypes.DeleteTree: {
       localStorage.removeItem(TREE_DATA_KEY);
-      return {
-        data: [],
-        selectedNode: null,
-      };
+      return initialTreeState;
     }
 
     default:

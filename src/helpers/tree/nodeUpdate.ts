@@ -110,8 +110,8 @@ export const showPlusNodeChildren = (node: TreeData): void => {
 /**
  * Convert the node into a regular node.
  */
-export const convertNodeToRegular = (node: TreeData, name = '0'): void => {
-  node.name = name;
+export const convertNodeToRegular = (node: TreeData, value = 0): void => {
+  node.name = value.toString();
   node.type = NodeTypes.Regular;
   node.nodeSvgShape = cloneDeep(REGULAR_NODE_SVG_STYLE);
 };
@@ -119,8 +119,8 @@ export const convertNodeToRegular = (node: TreeData, name = '0'): void => {
 /**
  * Create a regular root node.
  */
-export const createRegularNode = (name = '0', location = ''): TreeData => ({
-  name,
+export const createRegularNode = (value = 0, location = ''): TreeData => ({
+  name: value.toString(),
   location,
   type: NodeTypes.Regular,
   nodeSvgShape: cloneDeep(REGULAR_NODE_SVG_STYLE),

@@ -27,9 +27,9 @@ export const VISUALIZATION_SPEED_DISPLAY = {
  * Visualization speed option to millisecond mapping.
  */
 export const VISUALIZATION_SPEED_MAPPING = {
-  [VisualizationSpeed.Fast]: 400,
-  [VisualizationSpeed.Average]: 600,
-  [VisualizationSpeed.Slow]: 900,
+  [VisualizationSpeed.Fast]: 250,
+  [VisualizationSpeed.Average]: 550,
+  [VisualizationSpeed.Slow]: 800,
 };
 
 /**

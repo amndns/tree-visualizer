@@ -38,7 +38,7 @@ const TreePlayground: FunctionComponent = () => {
   const { state, dispatch } = useContext(AppContext);
   const { playground, tree, visualization } = state;
   const { playgroundView } = playground;
-  const { data, selectedNode } = tree;
+  const { data, selectedNode, nodeCounter } = tree;
   const { speed, status, traversalPath, traversalPathIndex } = visualization;
 
   /**
@@ -110,10 +110,11 @@ const TreePlayground: FunctionComponent = () => {
 
     switch (getNodeClickAction(node as TreeData)) {
       case NodeClickActions.AddNewNode:
-        convertNodeToRegular(currentNode);
+        convertNodeToRegular(currentNode, nodeCounter + 1);
         dispatch(
           updateTree({
             data: rootNodeClone,
+            nodeCounter: nodeCounter + 1,
           })
         );
         break;
@@ -195,10 +196,10 @@ export default TreePlayground;
 // [/] Add the other algorithms
 // [/] Add serialization and deserialization
 // [] Add tutorial modal
-// [] Add empty playground styling
-// [] Add auto-counter for node names
+// [/] Add empty playground styling
+// [/] Add auto-counter for node names
 // [] Finalize styling
-//    [] Fix scrolling issue
+//    [/] Fix scrolling issue
 //    [] Fix slow zooming
 //    [] Change the node styling color
 //    [] Change the tag styling color

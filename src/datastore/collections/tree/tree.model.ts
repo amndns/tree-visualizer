@@ -54,11 +54,13 @@ export interface SelectedNode {
 export interface Tree {
   data: TreeData | [];
   selectedNode: SelectedNode | null;
+  nodeCounter: number;
 }
 
 export interface TreeActionPayload {
   data?: TreeData | [];
   selectedNode?: SelectedNode | null;
+  nodeCounter?: number;
 }
 
 export interface TreeAction {
