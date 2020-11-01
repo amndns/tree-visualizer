@@ -201,6 +201,7 @@ export default TreePlayground;
 // [] Finalize styling
 //    [/] Fix scrolling issue
 //    [] Fix slow zooming
+//    [] Fix 'any' interfaces
 //    [] Change the node styling color
 //    [] Change the tag styling color
 //    [] Other misc
