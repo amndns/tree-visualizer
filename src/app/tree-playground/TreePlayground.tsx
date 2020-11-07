@@ -195,15 +195,16 @@ export default TreePlayground;
 // TODO:
 // [/] Add the other algorithms
 // [/] Add serialization and deserialization
-// [] Add tutorial modal
+// [/] Add tutorial modal
 // [/] Add empty playground styling
 // [/] Add auto-counter for node names
 // [] Finalize styling
+//    [] Fix modal behavior (fixed size, video loading)
 //    [/] Fix scrolling issue
 //    [] Fix slow zooming
 //    [] Fix 'any' interfaces
-//    [] Change the node styling color
-//    [] Change the tag styling color
+//    [/] Change the node styling color
+//    [/] Change the tag styling color
 //    [] Other misc
 
 // OPTIONAL:

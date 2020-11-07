@@ -14,10 +14,6 @@ const TutorialView: FunctionComponent = () => {
     setVisible(true);
   };
 
-  const handleAfterClose = () => {
-    setPage(0);
-  };
-
   const handleDone = () => {
     setVisible(false);
   };
@@ -35,7 +31,6 @@ const TutorialView: FunctionComponent = () => {
       <TutorialModal
         page={page}
         visible={visible}
-        handleAfterClose={handleAfterClose}
         handleDone={handleDone}
         handleNextPage={handleNextPage}
         handlePreviousPage={handlePreviousPage}

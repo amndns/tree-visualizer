@@ -1,4 +1,10 @@
-import { createPlusNode, createRegularNode } from 'helpers/tree';
+import cloneDeep from 'lodash-es/cloneDeep';
+
+import {
+  INITIAL_ROOT_NODE,
+  createPlusNode,
+  createRegularNode,
+} from 'helpers/tree';
 import { toNumber } from 'helpers/utils';
 
 import { NodeChildIndex, NodeTypes, TreeData } from './tree.model';
@@ -64,10 +70,10 @@ const leetcodifyTreeDataArray = (treeDataArray: TreeDataArray) => {
  */
 export const deserializeTreeData = (
   serializeTreeData: string | null
-): TreeData | [] => {
+): TreeData => {
   const treeDataArray = JSON.parse(serializeTreeData ?? '[]');
 
-  if (!isValidTreeDataArray(treeDataArray)) return [];
+  if (!isValidTreeDataArray(treeDataArray)) return cloneDeep(INITIAL_ROOT_NODE);
 
   const root = createRegularNode(treeDataArray[0].toString());
   const queue: [TreeData, number][] = [[root, 0]];
@@ -122,11 +128,7 @@ export const deserializeTreeData = (
  * array. This allows the app to copy the LeetCode version of the tree
  * into the user's clipboard for LeetCode use.
  */
-export const serializeTreeData = (
-  treeData: TreeData | []
-): [string, string] => {
-  if (treeData === []) return ['[]', '[]'];
-
+export const serializeTreeData = (treeData: TreeData): [string, string] => {
   let treeDataArray: TreeDataArray = [];
   let treeLevel = 0;
 

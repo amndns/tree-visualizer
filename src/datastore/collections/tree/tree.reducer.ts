@@ -1,3 +1,6 @@
+import cloneDeep from 'lodash-es/cloneDeep';
+
+import { INITIAL_ROOT_NODE } from 'helpers/tree';
 import { copyToClipboard } from 'helpers/utils';
 
 import {
@@ -17,7 +20,7 @@ const TREE_DATA_KEY = 'tree-visualization-data';
 const TREE_NODE_COUNTER_KEY = 'tree-node-counter';
 
 export const initialTreeState: Tree = {
-  data: [],
+  data: cloneDeep(INITIAL_ROOT_NODE),
   selectedNode: null,
   nodeCounter: 0,
 };
@@ -67,6 +70,7 @@ const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
 
     case TreeActionTypes.DeleteTree: {
       localStorage.removeItem(TREE_DATA_KEY);
+      localStorage.removeItem(TREE_NODE_COUNTER_KEY);
       return initialTreeState;
     }
 

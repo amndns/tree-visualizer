@@ -187,10 +187,10 @@ const DefaultView: FunctionComponent<any> = ({ speedMenu }) => {
         <Tag color="default" icon={<ClockCircleOutlined />}>
           Unvisited
         </Tag>
-        <Tag color="processing" icon={<SyncOutlined />}>
+        <Tag color="#096dd9" icon={<SyncOutlined />}>
           Explored
         </Tag>
-        <Tag color="success" icon={<CheckCircleOutlined />}>
+        <Tag color="#389e0d" icon={<CheckCircleOutlined />}>
           Processed
         </Tag>
       </div>

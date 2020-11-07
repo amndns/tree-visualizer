@@ -41,7 +41,7 @@ export const EXPLORED_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
   shape: 'circle',
   shapeProps: {
     r: 30,
-    stroke: 'blue', // CHANGE_ME
+    stroke: '#096dd9',
     strokeWidth: 10,
     fill: '#FFFFFF',
   },
@@ -56,7 +56,7 @@ export const PROCESSED_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
   shape: 'circle',
   shapeProps: {
     r: 30,
-    stroke: 'green', // CHANGE_ME
+    stroke: '#389e0d',
     strokeWidth: 10,
     fill: '#FFFFFF',
   },

@@ -75,6 +75,11 @@ const NodeUpdateView: FunctionComponent = () => {
 
     // Clear the tree if the root node is being deleted
     if (selectedNode.location === ROOT_NODE_LOCATION) {
+      dispatch(
+        updatePlayground({
+          playgroundView: PlaygroundView.Home,
+        })
+      );
       dispatch(deleteTree());
       return;
     }

@@ -1,6 +1,10 @@
+import { cloneDeep } from 'lodash-es';
+
 import {
+  NodeTypes,
   NodeVisibility,
   StrictNodeSvgShape,
+  TreeData,
 } from 'datastore/collections/tree/tree.model';
 
 /**
@@ -66,9 +70,19 @@ export const SELECTED_NODE_SVG_STYLE: Readonly<StrictNodeSvgShape> = {
   shape: 'circle',
   shapeProps: {
     r: 30,
-    stroke: 'red', // CHANGE_ME
+    stroke: '#003a8c',
     strokeWidth: 10,
     fill: '#FFFFFF',
     visibility: NodeVisibility.Visible,
   },
+};
+
+/**
+ * Initial root node of a tree.
+ */
+export const INITIAL_ROOT_NODE: TreeData = {
+  name: '0',
+  location: '',
+  type: NodeTypes.Regular,
+  nodeSvgShape: cloneDeep(REGULAR_NODE_SVG_STYLE),
 };

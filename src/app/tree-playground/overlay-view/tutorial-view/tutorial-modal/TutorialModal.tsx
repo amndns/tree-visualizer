@@ -4,12 +4,11 @@ import { Button, Modal } from 'antd';
 
 import { MAX_PAGE, TUTORIAL_CONTENT } from './TutorialContent';
 
-const MODAL_WIDTH = 550; // in pixels
+const MODAL_WIDTH = 600; // in pixels
 
 const TutorialModal: FunctionComponent<any> = ({
   page,
   visible,
-  handleAfterClose,
   handleDone,
   handleNextPage,
   handlePreviousPage,
@@ -38,7 +37,6 @@ const TutorialModal: FunctionComponent<any> = ({
         </Button>,
       ]}
       width={MODAL_WIDTH}
-      afterClose={handleAfterClose}
       onOk={handleDone}
       onCancel={handleDone}
     >
