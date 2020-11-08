@@ -28,7 +28,13 @@ import {
   VISUALIZATION_SPEED_DISPLAY,
 } from 'helpers/visualization';
 
-const DefaultView: FunctionComponent<any> = ({ speedMenu }) => {
+interface VisualizationViewProps {
+  speedMenu: JSX.Element;
+}
+
+const VisualizationView: FunctionComponent<VisualizationViewProps> = ({
+  speedMenu,
+}) => {
   const { state, dispatch } = useContext(AppContext);
   const {
     tree: { data },
@@ -198,4 +204,4 @@ const DefaultView: FunctionComponent<any> = ({ speedMenu }) => {
   );
 };
 
-export default DefaultView;
+export default VisualizationView;

@@ -18,10 +18,18 @@ import {
   VISUALIZATION_SPEED_DISPLAY,
 } from 'helpers/visualization';
 
+interface HomeViewProps {
+  speedMenu: JSX.Element;
+  visualizationMenu: JSX.Element;
+}
+
 const NOTIFICATION_PLACEMENT = 'bottomLeft';
 const NOTIFICATION_DURATION = 5; // in seconds
 
-const HomeView: FunctionComponent<any> = ({ speedMenu, visualizationMenu }) => {
+const HomeView: FunctionComponent<HomeViewProps> = ({
+  speedMenu,
+  visualizationMenu,
+}) => {
   const { state, dispatch } = useContext(AppContext);
   const {
     tree: { data },

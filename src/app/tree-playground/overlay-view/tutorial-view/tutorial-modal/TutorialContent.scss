@@ -1,0 +1,13 @@
+.tutorial-content {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-around;
+
+  &-video {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 273px;
+  }
+}

@@ -4,9 +4,17 @@ import { Button, Modal } from 'antd';
 
 import { MAX_PAGE, TUTORIAL_CONTENT } from './TutorialContent';
 
+interface TutorialModalProps {
+  page: number;
+  visible: boolean;
+  handleDone: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  handleNextPage: () => void;
+  handlePreviousPage: () => void;
+}
+
 const MODAL_WIDTH = 600; // in pixels
 
-const TutorialModal: FunctionComponent<any> = ({
+const TutorialModal: FunctionComponent<TutorialModalProps> = ({
   page,
   visible,
   handleDone,
@@ -17,6 +25,7 @@ const TutorialModal: FunctionComponent<any> = ({
 
   return (
     <Modal
+      centered
       visible={visible}
       title={title}
       footer={[

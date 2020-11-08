@@ -16,6 +16,13 @@ import NodeUpdateView from './node-update-view/NodeUpdateView';
 import TutorialView from './tutorial-view/TutorialView';
 import VisualizationView from './visualization-view/VisualizationView';
 
+interface MenuInfo {
+  key: React.Key;
+  keyPath: React.Key[];
+  item: React.ReactInstance;
+  domEvent: React.MouseEvent<HTMLElement>;
+}
+
 interface OverlayViewProps {
   playgroundView: string;
 }
@@ -28,7 +35,7 @@ const OverlayView: FunctionComponent<OverlayViewProps> = ({
   /**
    * Handles the changing of the visualization speed.
    */
-  const handleSpeedMenuItemClick = ({ key }: any) => {
+  const handleSpeedMenuItemClick = ({ key }: MenuInfo) => {
     dispatch(
       updateVisualization({
         speed: key as VisualizationSpeed,
@@ -39,7 +46,7 @@ const OverlayView: FunctionComponent<OverlayViewProps> = ({
   /**
    * Handles the changing of the visualization algorithm.
    */
-  const handleVisualizationMenuItemClick = ({ key }: any) => {
+  const handleVisualizationMenuItemClick = ({ key }: MenuInfo) => {
     dispatch(
       updateVisualization({
         algorithm: key as VisualizationAlgorithms,

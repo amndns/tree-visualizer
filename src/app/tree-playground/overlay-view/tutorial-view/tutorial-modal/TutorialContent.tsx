@@ -8,8 +8,12 @@ import saveTreeVideo from 'assets/videos/tutorials/saveTree.mp4';
 import traversalAlgorithmsVideo from 'assets/videos/tutorials/traversalAlgorithms.mp4';
 import visualizingAlgorithmsVideo from 'assets/videos/tutorials/visualizingAlgorithms.mp4';
 
+import './TutorialContent.scss';
+
+const CONTENT_VIDEO_HEIGHT = 273; // in pixels
+
 const ADD_NODE_CONTENT = (
-  <>
+  <div className="tutorial-content">
     <ol>
       <li>Click on a leaf node or a node with incomplete children.</li>
       <li>
@@ -18,14 +22,16 @@ const ADD_NODE_CONTENT = (
       </li>
       <li>Voila! A new node has been created.</li>
     </ol>
-    <video key="add-node" loop autoPlay muted width="550">
-      <source src={addNodeVideo} type="video/mp4" />
-    </video>
-  </>
+    <div className="tutorial-content-video">
+      <video key="add-node" loop autoPlay muted height={CONTENT_VIDEO_HEIGHT}>
+        <source src={addNodeVideo} type="video/mp4" />
+      </video>
+    </div>
+  </div>
 );
 
 const EDIT_NODE_CONTENT = (
-  <>
+  <div className="tutorial-content">
     <ol>
       <li>Click on the node you want to edit.</li>
       <li>
@@ -37,14 +43,16 @@ const EDIT_NODE_CONTENT = (
       </li>
       <li>Voila! The node value has been updated.</li>
     </ol>
-    <video key="edit-node" loop autoPlay muted width="550">
-      <source src={editNodeVideo} type="video/mp4" />
-    </video>
-  </>
+    <div className="tutorial-content-video">
+      <video key="edit-node" loop autoPlay muted height={CONTENT_VIDEO_HEIGHT}>
+        <source src={editNodeVideo} type="video/mp4" />
+      </video>
+    </div>
+  </div>
 );
 
 const DELETE_NODE_CONTENT = (
-  <>
+  <div className="tutorial-content">
     <ol>
       <li>Click on the node you want to delete.</li>
       <li>
@@ -53,14 +61,22 @@ const DELETE_NODE_CONTENT = (
       </li>
       <li>Voila! The node and its descendants has been deleted.</li>
     </ol>
-    <video key="delete-node" loop autoPlay muted width="550">
-      <source src={deleteNodeVideo} type="video/mp4" />
-    </video>
-  </>
+    <div className="tutorial-content-video">
+      <video
+        key="delete-node"
+        loop
+        autoPlay
+        muted
+        height={CONTENT_VIDEO_HEIGHT}
+      >
+        <source src={deleteNodeVideo} type="video/mp4" />
+      </video>
+    </div>
+  </div>
 );
 
 const SAVE_TREE_CONTENT = (
-  <>
+  <div className="tutorial-content">
     <ol>
       <li>Click the save icon button on the top right corner of the screen.</li>
       <li>
@@ -72,14 +88,16 @@ const SAVE_TREE_CONTENT = (
         clipboard. You can directly paste it on any LeetCode tree problems.
       </li>
     </ol>
-    <video key="save-tree" loop autoPlay muted width="550">
-      <source src={saveTreeVideo} type="video/mp4" />
-    </video>
-  </>
+    <div className="tutorial-content-video">
+      <video key="save-tree" loop autoPlay muted height={CONTENT_VIDEO_HEIGHT}>
+        <source src={saveTreeVideo} type="video/mp4" />
+      </video>
+    </div>
+  </div>
 );
 
 const DELETE_TREE_CONTENT = (
-  <>
+  <div className="tutorial-content">
     <ol>
       <li>
         Click the delete icon button on the top right corner of the screen.
@@ -93,14 +111,22 @@ const DELETE_TREE_CONTENT = (
         node of your tree.
       </li>
     </ol>
-    <video key="delete-tree" loop autoPlay muted width="550">
-      <source src={deleteTreeVideo} type="video/mp4" />
-    </video>
-  </>
+    <div className="tutorial-content-video">
+      <video
+        key="delete-tree"
+        loop
+        autoPlay
+        muted
+        height={CONTENT_VIDEO_HEIGHT}
+      >
+        <source src={deleteTreeVideo} type="video/mp4" />
+      </video>
+    </div>
+  </div>
 );
 
 const TRAVERSAL_ALGORITHMS_CONTENT = (
-  <>
+  <div className="tutorial-content">
     <ul>
       <li>
         <strong>Level-order</strong> - process nodes per depth from left to
@@ -119,14 +145,22 @@ const TRAVERSAL_ALGORITHMS_CONTENT = (
         subtree, process node
       </li>
     </ul>
-    <video key="traversal-algorithms" loop autoPlay muted width="550">
-      <source src={traversalAlgorithmsVideo} type="video/mp4" />
-    </video>
-  </>
+    <div className="tutorial-content-video">
+      <video
+        key="traversal-algorithms"
+        loop
+        autoPlay
+        muted
+        height={CONTENT_VIDEO_HEIGHT}
+      >
+        <source src={traversalAlgorithmsVideo} type="video/mp4" />
+      </video>
+    </div>
+  </div>
 );
 
 const VISUALIZING_ALGORITHMS_CONTENT = (
-  <>
+  <div className="tutorial-content">
     <ol>
       <li>
         Select the traversal algorithm and the algorithm speed via the dropdowns
@@ -141,10 +175,18 @@ const VISUALIZING_ALGORITHMS_CONTENT = (
         animation colors on the bottom left corner of the screen.
       </li>
     </ol>
-    <video key="visualizing-algorithms" loop autoPlay muted width="550">
-      <source src={visualizingAlgorithmsVideo} type="video/mp4" />
-    </video>
-  </>
+    <div className="tutorial-content-video">
+      <video
+        key="visualizing-algorithms"
+        loop
+        autoPlay
+        muted
+        height={CONTENT_VIDEO_HEIGHT}
+      >
+        <source src={visualizingAlgorithmsVideo} type="video/mp4" />
+      </video>
+    </div>
+  </div>
 );
 
 export const TUTORIAL_CONTENT = [
