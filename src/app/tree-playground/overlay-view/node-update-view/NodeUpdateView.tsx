@@ -39,12 +39,15 @@ const NodeUpdateView: FunctionComponent = () => {
     setInputValue(selectedNode?.name ?? '');
   }, [selectedNode]);
 
+  const isValidNaturalNumber = (value: string): boolean => {
+    const regex = /^([1-9]+\d*|0)$/;
+    return (!Number.isNaN(+value) && regex.test(value)) || value === '';
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    // Check if the value is a natural number
-    const regex = /^([1-9]+\d*|0)$/;
-    if ((!Number.isNaN(+value) && regex.test(value)) || value === '') {
+    if (isValidNaturalNumber(value)) {
       setInputValue(e.target.value);
     }
   };
@@ -61,6 +64,14 @@ const NodeUpdateView: FunctionComponent = () => {
         data: rootNodeClone,
       })
     );
+  };
+
+  const handlePressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+
+    if (isValidNaturalNumber(value)) {
+      handleEditNode();
+    }
   };
 
   /**
@@ -143,6 +154,7 @@ const NodeUpdateView: FunctionComponent = () => {
           placeholder="Node Value"
           value={inputValue}
           onChange={handleInputChange}
+          onPressEnter={handlePressEnter}
         />
         <Button
           className="overlay-left-compressed-item"

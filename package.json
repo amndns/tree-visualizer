@@ -14,7 +14,7 @@
     "@types/react-dom": "^16.9.0",
     "antd": "^4.6.4",
     "lodash-es": "^4.17.15",
-    "node-sass": "^4.14.1",
+    "node-sass": "4.14.1",
     "react": "^16.13.1",
     "react-d3-tree": "^1.16.1",
     "react-dom": "^16.13.1",
