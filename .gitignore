@@ -12,7 +12,7 @@
 /build
 
 # typescript
-src/*.d.ts
+react-app-env.d.ts
 
 # misc
 .DS_Store
