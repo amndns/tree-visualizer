@@ -17,15 +17,13 @@
 
 > Tree Visualizer is an online platform for creating and customizing rooted binary trees and visualizing common tree traversal algorithms.
 
-## ✨ Demo
-
-Visit the platform at [tree-visualizer.netlify.app](https://tree-visualizer.netlify.app/).
-
 <p align="center">
   <img width="720" align="center" src="docs/assets/demo.gif" alt="demo"/>
 </p>
 
 ## ✨ Features
+
+Visit the platform at [tree-visualizer.netlify.app](https://tree-visualizer.netlify.app/)
 
 - You can create and customize rooted binary trees.
 - You can visualize common tree traversal algorithms.
@@ -45,7 +43,7 @@ Contributions, issues, and feature requests are welcome!<br />
 
 Feel free to check the [issues page](https://github.com/amndns/tree-visualizer/issues) for any open issues. If this is your first time contributing to Open Source, check out the [Contributing Guidelines](https://github.com/amndns/tree-visualizer/blob/master/CONTRIBUTING.md).
 
-You can also suggest a new feature by creating an [issue](https://github.com/amndns/tree-visualizer/issues/new). Please wait for confirmation before working on it.
+You can also suggest a new feature by [creating an issue](https://github.com/amndns/tree-visualizer/issues/new). Please wait for confirmation before working on it.
 
 ### Good for First Timers
 
@@ -59,19 +57,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Below is a guide on the common commands you might use all throughout the development process. In the project directory, you can run:
 
-### `yarn install`
+#### `yarn install`
 
 Installs all package dependencies of the app. Make sure you have [yarn](https://yarnpkg.com/) installed and configured first.
 
-### `yarn start`
+#### `yarn start`
 
 Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits. You will also see any lint errors in the console.
 
-### `yarn lint`
+#### `yarn lint`
 
 Launches the linter against all of the `.ts` and `.tsx` files from the `src/` directory. The project specifically uses [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) as the linter and code formatter, respectively.
 
-### `yarn test`
+#### `yarn test`
 
 Launches the test runner in interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 

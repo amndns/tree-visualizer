@@ -4,7 +4,6 @@
   "description": "Online platform for creating and visualizing rooted binary trees.",
   "author": "Adel Ismael Mandanas",
   "license": "MIT",
-  "homepage": "https://github.com/amndns/tree-visualizer#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amndns/tree-visualizer.git"
