@@ -9,5 +9,15 @@
     display: flex;
     flex-direction: column;
     height: 273px;
+
+    &-background {
+      background-color:#F0F5FFA2;
+      min-height: 273px;
+      min-width: 523px;
+    }
+
+    video {
+      position: absolute;
+    }
   }
 }

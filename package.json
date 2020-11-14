@@ -1,6 +1,17 @@
 {
   "name": "tree-visualizer",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Online platform for creating and visualizing rooted binary trees.",
+  "author": "Adel Ismael Mandanas",
+  "license": "MIT",
+  "homepage": "https://github.com/amndns/tree-visualizer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amndns/tree-visualizer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amndns/tree-visualizer/issues"
+  },
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
@@ -25,7 +36,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.ts src/**/*.tsx"
   },
   "eslintConfig": {
     "extends": "react-app"

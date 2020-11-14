@@ -23,6 +23,7 @@ const ADD_NODE_CONTENT = (
       <li>Voila! A new node has been created.</li>
     </ol>
     <div className="tutorial-content-video">
+      <div className="tutorial-content-video-background" />
       <video key="add-node" loop autoPlay muted height={CONTENT_VIDEO_HEIGHT}>
         <source src={addNodeVideo} type="video/mp4" />
       </video>
@@ -44,6 +45,7 @@ const EDIT_NODE_CONTENT = (
       <li>Voila! The node value has been updated.</li>
     </ol>
     <div className="tutorial-content-video">
+      <div className="tutorial-content-video-background" />
       <video key="edit-node" loop autoPlay muted height={CONTENT_VIDEO_HEIGHT}>
         <source src={editNodeVideo} type="video/mp4" />
       </video>
@@ -62,6 +64,7 @@ const DELETE_NODE_CONTENT = (
       <li>Voila! The node and its descendants has been deleted.</li>
     </ol>
     <div className="tutorial-content-video">
+      <div className="tutorial-content-video-background" />
       <video
         key="delete-node"
         loop
@@ -89,6 +92,7 @@ const SAVE_TREE_CONTENT = (
       </li>
     </ol>
     <div className="tutorial-content-video">
+      <div className="tutorial-content-video-background" />
       <video key="save-tree" loop autoPlay muted height={CONTENT_VIDEO_HEIGHT}>
         <source src={saveTreeVideo} type="video/mp4" />
       </video>
@@ -112,6 +116,7 @@ const DELETE_TREE_CONTENT = (
       </li>
     </ol>
     <div className="tutorial-content-video">
+      <div className="tutorial-content-video-background" />
       <video
         key="delete-tree"
         loop
@@ -146,6 +151,7 @@ const TRAVERSAL_ALGORITHMS_CONTENT = (
       </li>
     </ul>
     <div className="tutorial-content-video">
+      <div className="tutorial-content-video-background" />
       <video
         key="traversal-algorithms"
         loop
@@ -176,6 +182,7 @@ const VISUALIZING_ALGORITHMS_CONTENT = (
       </li>
     </ol>
     <div className="tutorial-content-video">
+      <div className="tutorial-content-video-background" />
       <video
         key="visualizing-algorithms"
         loop

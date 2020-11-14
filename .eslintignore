@@ -1,0 +1,2 @@
+# Ignore service worker file
+src/app/serviceWorker.ts
