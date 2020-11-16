@@ -53,16 +53,50 @@ const TreePlayground: FunctionComponent = () => {
    * another re-render before an unload event.
    */
   const handleSaveTree = useCallback(() => {
-    saveTreeToLocalStorage(tree.data, nodeCounter);
-  }, [nodeCounter, tree]);
+    saveTreeToLocalStorage(data, nodeCounter);
+  }, [nodeCounter, data]);
 
   /**
-   * Save the tree on application unload.
+   * Unselect the currently selected node on escape key press.
+   */
+  const handleEscapeKeyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (
+        event.code !== 'Escape' ||
+        selectedNode === null ||
+        playgroundView !== PlaygroundView.NodeUpdate
+      ) {
+        return;
+      }
+
+      const rootNodeClone = cloneDeep(data) as TreeData;
+      hidePlusNodesByLocation(rootNodeClone, selectedNode?.location);
+      dispatch(
+        updatePlayground({
+          playgroundView: PlaygroundView.Home,
+        })
+      );
+      dispatch(
+        updateTree({
+          data: rootNodeClone,
+          selectedNode: null,
+        })
+      );
+    },
+    [dispatch, data, playgroundView, selectedNode]
+  );
+
+  /**
+   * Subscribe to events on component mount and unsubscribe on unmount.
    */
   useEffect(() => {
     window.addEventListener('beforeunload', handleSaveTree);
-    return () => window.removeEventListener('beforeunload', handleSaveTree);
-  }, [handleSaveTree]);
+    window.addEventListener('keydown', handleEscapeKeyPress);
+    return () => {
+      window.removeEventListener('beforeunload', handleSaveTree);
+      window.removeEventListener('keydown', handleEscapeKeyPress);
+    };
+  }, [handleSaveTree, handleEscapeKeyPress]);
 
   /**
    * Handles the main logic for the visualization animation. The idea
