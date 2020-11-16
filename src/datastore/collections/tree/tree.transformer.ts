@@ -38,6 +38,7 @@ const pruneTreeDataArray = (treeDataArray: TreeDataArray): TreeDataArray => {
 
   return prunedTreeDataArray;
 };
+
 /**
  * Generates the LeetCode version of the tree data array from the original
  * tree data array used in this application. The LeetCode version is similar
@@ -45,7 +46,9 @@ const pruneTreeDataArray = (treeDataArray: TreeDataArray): TreeDataArray => {
  * terminator (i.e. no node exists below) instead of it signifying a
  * non-existent node in the position.
  */
-const leetcodifyTreeDataArray = (treeDataArray: TreeDataArray) => {
+const generateLeetCodeTreeDataArray = (
+  treeDataArray: TreeDataArray
+): TreeDataArray => {
   const leetcodeTreeDataArray = [...treeDataArray];
   let nodeIdx = leetcodeTreeDataArray.length - 1;
 
@@ -57,7 +60,74 @@ const leetcodifyTreeDataArray = (treeDataArray: TreeDataArray) => {
     nodeIdx -= 1;
   }
 
-  return pruneTreeDataArray(leetcodeTreeDataArray);
+  return leetcodeTreeDataArray;
+};
+
+/**
+ * Generates a tree data array version of the datastore tree data. The
+ * generation is achieved by traversing the tree in a level-order manner
+ * and then pushing them into the tree data array. The complex part is
+ * identifying the amount of null values to push in between node values in
+ * the tree data array.
+ */
+const generateTreeDataArray = (treeData: TreeData): TreeDataArray => {
+  let treeDataArray: TreeDataArray = [];
+  let treeLevel = 0;
+
+  const currentNode = treeData as TreeData;
+  const queue: [TreeData, number][] = [[currentNode, 0]];
+
+  while (queue.length) {
+    const numNodesInLevel = 1 << treeLevel;
+    let numNodesInQueueToProcess = queue.length;
+    let numNodesSoFar = 0;
+    let prevNodeIdx = -1;
+
+    while (numNodesInQueueToProcess > 0) {
+      const stackElem = queue.shift();
+
+      if (!stackElem) break;
+
+      const [node, currNodeIdx] = stackElem;
+
+      if (prevNodeIdx === -1 && currNodeIdx !== 0) {
+        treeDataArray = treeDataArray.concat(Array(currNodeIdx).fill(null));
+      } else if (
+        prevNodeIdx !== currNodeIdx - 1 &&
+        prevNodeIdx !== currNodeIdx
+      ) {
+        treeDataArray = treeDataArray.concat(
+          Array(currNodeIdx - prevNodeIdx - 1).fill(null)
+        );
+      }
+
+      treeDataArray.push(toNumber(node.name));
+
+      numNodesSoFar = currNodeIdx + 1;
+      numNodesInQueueToProcess -= 1;
+      prevNodeIdx = currNodeIdx;
+
+      if (!node.children) continue;
+
+      if (node.children[NodeChildIndex.Left].type === NodeTypes.Regular) {
+        queue.push([node.children[NodeChildIndex.Left], 2 * currNodeIdx]);
+      }
+
+      if (node.children[NodeChildIndex.Right].type === NodeTypes.Regular) {
+        queue.push([node.children[NodeChildIndex.Right], 2 * currNodeIdx + 1]);
+      }
+    }
+
+    if (numNodesSoFar !== numNodesInLevel) {
+      treeDataArray = treeDataArray.concat(
+        Array(numNodesInLevel - numNodesSoFar).fill(null)
+      );
+    }
+
+    treeLevel += 1;
+  }
+
+  return pruneTreeDataArray(treeDataArray);
 };
 
 /**
@@ -118,76 +188,14 @@ export const deserializeTreeData = (
 };
 
 /**
- * Handles the serialization of the tree data by converting it into a
- * tree data array format and then converting it to JSON. The
- * serialization is achieved by traversing the tree in a level-order
- * manner and then pushing them into the tree data array. The complex
- * part is identifying the amount of null values to push in between
- * node values in the tree data array. Moreover, the LeetCode version of
- * the tree data array is also returned along with the original tree data
- * array. This allows the app to copy the LeetCode version of the tree
- * into the user's clipboard for LeetCode use.
+ * Handles the serialization of the datastore tree data by generating
+ * both the LeetCode version and LocalStorage version of the tree data.
  */
 export const serializeTreeData = (treeData: TreeData): [string, string] => {
-  let treeDataArray: TreeDataArray = [];
-  let treeLevel = 0;
-
-  const currentNode = treeData as TreeData;
-  const queue: [TreeData, number][] = [[currentNode, 0]];
-
-  while (queue.length) {
-    const numNodesInLevel = 1 << treeLevel;
-    let numNodesInQueueToProcess = queue.length;
-    let numNodesSoFar = 0;
-    let prevNodeIdx = -1;
-
-    while (numNodesInQueueToProcess > 0) {
-      const stackElem = queue.shift();
-
-      if (!stackElem) break;
-
-      const [node, currNodeIdx] = stackElem;
-
-      if (prevNodeIdx === -1 && currNodeIdx !== 0) {
-        treeDataArray = treeDataArray.concat(Array(currNodeIdx).fill(null));
-      } else if (
-        prevNodeIdx !== currNodeIdx - 1 &&
-        prevNodeIdx !== currNodeIdx
-      ) {
-        treeDataArray = treeDataArray.concat(
-          Array(currNodeIdx - prevNodeIdx - 1).fill(null)
-        );
-      }
-
-      treeDataArray.push(toNumber(node.name));
-
-      numNodesSoFar = currNodeIdx + 1;
-      numNodesInQueueToProcess -= 1;
-      prevNodeIdx = currNodeIdx;
-
-      if (!node.children) continue;
-
-      if (node.children[NodeChildIndex.Left].type === NodeTypes.Regular) {
-        queue.push([node.children[NodeChildIndex.Left], 2 * currNodeIdx]);
-      }
-
-      if (node.children[NodeChildIndex.Right].type === NodeTypes.Regular) {
-        queue.push([node.children[NodeChildIndex.Right], 2 * currNodeIdx + 1]);
-      }
-    }
-
-    if (numNodesSoFar !== numNodesInLevel) {
-      treeDataArray = treeDataArray.concat(
-        Array(numNodesInLevel - numNodesSoFar).fill(null)
-      );
-    }
-
-    treeLevel += 1;
-  }
-
+  const treeDataArray = generateTreeDataArray(treeData);
   return [
-    JSON.stringify(pruneTreeDataArray(treeDataArray)),
-    JSON.stringify(leetcodifyTreeDataArray(treeDataArray)),
+    JSON.stringify(treeDataArray),
+    JSON.stringify(generateLeetCodeTreeDataArray(treeDataArray)),
   ];
 };
 

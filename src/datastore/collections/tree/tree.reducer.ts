@@ -8,6 +8,7 @@ import {
   TreeAction,
   TreeActionPayload,
   TreeActionTypes,
+  TreeData,
 } from './tree.model';
 import {
   deserializeNodeCounter,
@@ -16,8 +17,8 @@ import {
   serializeTreeData,
 } from './tree.transformer';
 
-const TREE_DATA_KEY = 'tree-visualization-data';
-const TREE_NODE_COUNTER_KEY = 'tree-node-counter';
+export const TREE_DATA_KEY = 'tree-visualization-data';
+export const TREE_NODE_COUNTER_KEY = 'tree-node-counter';
 
 export const initialTreeState: Tree = {
   data: cloneDeep(INITIAL_ROOT_NODE),
@@ -29,10 +30,6 @@ export const fetchTree = (): TreeAction => ({
   type: TreeActionTypes.FetchTree,
 });
 
-export const saveTree = (): TreeAction => ({
-  type: TreeActionTypes.SaveTree,
-});
-
 export const updateTree = (payload: TreeActionPayload): TreeAction => ({
   type: TreeActionTypes.UpdateTree,
   payload,
@@ -41,6 +38,26 @@ export const updateTree = (payload: TreeActionPayload): TreeAction => ({
 export const deleteTree = (): TreeAction => ({
   type: TreeActionTypes.DeleteTree,
 });
+
+export const copyLeetCodeTreeToClipboard = (treeData: TreeData): void => {
+  const [, leetCodeSerializedTree] = serializeTreeData(treeData);
+  copyToClipboard(leetCodeSerializedTree);
+};
+
+export const saveTreeToLocalStorage = (
+  treeData: TreeData,
+  nodeCounter: number
+): void => {
+  const [serializedTree] = serializeTreeData(treeData);
+  const serializedNodeCounter = serializeNodeCounter(nodeCounter);
+  localStorage.setItem(TREE_DATA_KEY, serializedTree);
+  localStorage.setItem(TREE_NODE_COUNTER_KEY, serializedNodeCounter);
+};
+
+export const deleteTreeFromLocalStorage = (): void => {
+  localStorage.removeItem(TREE_DATA_KEY);
+  localStorage.removeItem(TREE_NODE_COUNTER_KEY);
+};
 
 const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
   switch (action.type) {
@@ -53,15 +70,6 @@ const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
         ),
       };
 
-    case TreeActionTypes.SaveTree: {
-      const [serializedTree, leetcodeTree] = serializeTreeData(state.data);
-      const serializedNodeCounter = serializeNodeCounter(state.nodeCounter);
-      localStorage.setItem(TREE_DATA_KEY, serializedTree);
-      localStorage.setItem(TREE_NODE_COUNTER_KEY, serializedNodeCounter);
-      copyToClipboard(leetcodeTree);
-      return state;
-    }
-
     case TreeActionTypes.UpdateTree:
       return {
         ...state,
@@ -69,8 +77,7 @@ const reducer = (state: Tree = initialTreeState, action: TreeAction): Tree => {
       };
 
     case TreeActionTypes.DeleteTree: {
-      localStorage.removeItem(TREE_DATA_KEY);
-      localStorage.removeItem(TREE_NODE_COUNTER_KEY);
+      deleteTreeFromLocalStorage();
       return initialTreeState;
     }
 

@@ -2,7 +2,9 @@ export { default as treeReducer } from './tree.reducer';
 export {
   initialTreeState,
   fetchTree,
-  saveTree,
+  saveTreeToLocalStorage,
+  copyLeetCodeTreeToClipboard,
   updateTree,
   deleteTree,
+  deleteTreeFromLocalStorage,
 } from './tree.reducer';

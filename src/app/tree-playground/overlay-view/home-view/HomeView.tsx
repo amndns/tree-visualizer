@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext } from 'react';
 
-import { DeleteOutlined, DownOutlined, SaveOutlined } from '@ant-design/icons';
+import { CopyOutlined, DeleteOutlined, DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown, notification } from 'antd';
 
 import './HomeView.scss';
@@ -8,7 +8,10 @@ import './HomeView.scss';
 import AppContext from 'app/context';
 import { updatePlayground } from 'datastore/collections/playground';
 import { PlaygroundView } from 'datastore/collections/playground/playground.model';
-import { saveTree, deleteTree } from 'datastore/collections/tree';
+import {
+  deleteTree,
+  copyLeetCodeTreeToClipboard,
+} from 'datastore/collections/tree';
 import { TreeData } from 'datastore/collections/tree/tree.model';
 import { updateVisualization } from 'datastore/collections/visualization';
 import { VisualizationStatus } from 'datastore/collections/visualization/visualization.model';
@@ -38,21 +41,19 @@ const HomeView: FunctionComponent<HomeViewProps> = ({
 
   const openNotification = (): void => {
     notification.success({
-      message: `Successfully Saved!`,
-      description: `A copy of the tree has been saved on your browser. The LeetCode array
-        version of the tree has also been copied to your clipboard!`,
+      message: `Successfully Copied!`,
+      description: `The LeetCode array version of the tree has been copied to your clipboard.`,
       duration: NOTIFICATION_DURATION,
       placement: NOTIFICATION_PLACEMENT,
     });
   };
 
-  // Update reducer, add delete action
   const handleClearTree = () => {
     dispatch(deleteTree());
   };
 
-  const handleSaveTree = () => {
-    dispatch(saveTree());
+  const handleCopyTree = () => {
+    copyLeetCodeTreeToClipboard(data);
     openNotification();
   };
 
@@ -92,11 +93,11 @@ const HomeView: FunctionComponent<HomeViewProps> = ({
         <div className="homeview-right">
           <Button
             className="homeview-right-item"
-            icon={<SaveOutlined />}
+            icon={<CopyOutlined />}
             shape="circle"
             size="large"
             type="primary"
-            onClick={handleSaveTree}
+            onClick={handleCopyTree}
           />
           <Button
             className="homeview-right-item danger"
@@ -122,11 +123,11 @@ const HomeView: FunctionComponent<HomeViewProps> = ({
         <div className="homeview-right">
           <Button
             className="homeview-right-item"
-            icon={<SaveOutlined />}
+            icon={<CopyOutlined />}
             shape="circle"
             size="middle"
             type="primary"
-            onClick={handleSaveTree}
+            onClick={handleCopyTree}
           />
           <Button
             className="homeview-right-item danger"

@@ -1,11 +1,16 @@
-import React, { FunctionComponent, useContext, useEffect } from 'react';
+import React, {
+  FunctionComponent,
+  useCallback,
+  useContext,
+  useEffect,
+} from 'react';
 
 import cloneDeep from 'lodash-es/cloneDeep';
 
 import AppContext from 'app/context';
 import { updatePlayground } from 'datastore/collections/playground';
 import { PlaygroundView } from 'datastore/collections/playground/playground.model';
-import { updateTree } from 'datastore/collections/tree';
+import { saveTreeToLocalStorage, updateTree } from 'datastore/collections/tree';
 import {
   UnionedTreeData,
   TreeData,
@@ -40,6 +45,24 @@ const TreePlayground: FunctionComponent = () => {
   const { playgroundView } = playground;
   const { data, selectedNode, nodeCounter } = tree;
   const { speed, status, traversalPath, traversalPathIndex } = visualization;
+
+  /**
+   * Memoized save tree callback function. This method should be used
+   * when the whole application is being unloaded instead of a redux
+   * dispatch call. The latter would not be ideal since it will trigger
+   * another re-render before an unload event.
+   */
+  const handleSaveTree = useCallback(() => {
+    saveTreeToLocalStorage(tree.data, nodeCounter);
+  }, [nodeCounter, tree]);
+
+  /**
+   * Save the tree on application unload.
+   */
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleSaveTree);
+    return () => window.removeEventListener('beforeunload', handleSaveTree);
+  }, [handleSaveTree]);
 
   /**
    * Handles the main logic for the visualization animation. The idea
