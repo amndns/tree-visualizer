@@ -1,11 +1,14 @@
 import React, { FunctionComponent, useContext } from 'react';
 
 import {
+  CaretRightOutlined,
   CheckCircleOutlined,
   ClockCircleOutlined,
   CloseCircleOutlined,
+  CloseOutlined,
   DownOutlined,
   PauseCircleOutlined,
+  PauseOutlined,
   PlayCircleOutlined,
   ReloadOutlined,
   SyncOutlined,
@@ -125,7 +128,8 @@ const VisualizationView: FunctionComponent<VisualizationViewProps> = ({
     );
   };
 
-  let animationButton;
+  let desktopAnimationButton;
+  let mobileAnimationButton;
 
   /**
    * The animation button has three states:
@@ -134,9 +138,9 @@ const VisualizationView: FunctionComponent<VisualizationViewProps> = ({
    *  - Pause button state, when the current animation is ongoing
    */
   if (traversalPathIndex === traversalPath.length) {
-    animationButton = null;
+    desktopAnimationButton = null;
   } else if (status === VisualizationStatus.Paused) {
-    animationButton = (
+    desktopAnimationButton = (
       <Button
         className="overlay-right-item"
         icon={<PlayCircleOutlined />}
@@ -146,10 +150,20 @@ const VisualizationView: FunctionComponent<VisualizationViewProps> = ({
         Play
       </Button>
     );
-  } else {
-    animationButton = (
+    mobileAnimationButton = (
       <Button
-        className="overlay-right-item"
+        className="homeview-right-item"
+        icon={<CaretRightOutlined />}
+        shape="circle"
+        size="middle"
+        type="primary"
+        onClick={handlePlayVisualization}
+      />
+    );
+  } else {
+    desktopAnimationButton = (
+      <Button
+        className="homeview-right-item"
         icon={<PauseCircleOutlined />}
         type="primary"
         onClick={handlePauseVisualization}
@@ -157,30 +171,40 @@ const VisualizationView: FunctionComponent<VisualizationViewProps> = ({
         Pause
       </Button>
     );
+    mobileAnimationButton = (
+      <Button
+        className="homeview-right-item"
+        icon={<PauseOutlined />}
+        shape="circle"
+        size="middle"
+        type="primary"
+        onClick={handlePauseVisualization}
+      />
+    );
   }
 
   return (
     <>
-      <div className="overlay">
-        <div className="overlay-left">
+      <div className="homeview desktop">
+        <div className="homeview-left">
           <Button
-            className="overlay-left-item"
+            className="homeview-left-item"
             icon={<ReloadOutlined />}
             type="primary"
             onClick={handleReplayVisualization}
           >
             {`Replay ${VISUALIZATION_ALGORITHMS_DISPLAY[algorithm]}`}
           </Button>
-          <Dropdown className="overlay-left-item" overlay={speedMenu}>
+          <Dropdown className="homeview-left-item" overlay={speedMenu}>
             <Button type="primary">
               {`Speed: ${VISUALIZATION_SPEED_DISPLAY[speed]}`} <DownOutlined />
             </Button>
           </Dropdown>
         </div>
-        <div className="overlay-right">
-          {animationButton}
+        <div className="homeview-right">
+          {desktopAnimationButton}
           <Button
-            className="overlay-right-item danger"
+            className="homeview-right-item danger"
             icon={<CloseCircleOutlined />}
             type="primary"
             onClick={handleStopVisualization}
@@ -189,7 +213,30 @@ const VisualizationView: FunctionComponent<VisualizationViewProps> = ({
           </Button>
         </div>
       </div>
-      <div className="overlay-bottom-left">
+      <div className="homeview mobile">
+        <div className="homeview-left">
+          <Button
+            className="homeview-left-item"
+            icon={<ReloadOutlined />}
+            type="primary"
+            onClick={handleReplayVisualization}
+          >
+            Replay
+          </Button>
+        </div>
+        <div className="homeview-right">
+          {mobileAnimationButton}
+          <Button
+            className="homeview-right-item danger"
+            icon={<CloseOutlined />}
+            shape="circle"
+            size="middle"
+            type="primary"
+            onClick={handleStopVisualization}
+          />
+        </div>
+      </div>
+      <div className="homeview-bottom-left">
         <Tag color="default" icon={<ClockCircleOutlined />}>
           Unvisited
         </Tag>

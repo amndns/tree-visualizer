@@ -144,44 +144,75 @@ const NodeUpdateView: FunctionComponent = () => {
   };
 
   return (
-    <div className="overlay">
-      <div className="overlay-left">
-        <Input
-          className="overlay-left-input"
-          addonBefore={<ApartmentOutlined />}
-          bordered
-          maxLength={MAX_NODE_VALUE_CHAR_COUNT}
-          placeholder="Node Value"
-          value={inputValue}
-          onChange={handleInputChange}
-          onPressEnter={handlePressEnter}
-        />
-        <Button
-          className="overlay-left-compressed-item"
-          type="primary"
-          disabled={inputValue === ''}
-          onClick={handleEditNode}
-        >
-          Edit Node
-        </Button>
-        <Button
-          className="overlay-left-compressed-item danger"
-          type="primary"
-          onClick={handleDeleteNode}
-        >
-          Delete Node
-        </Button>
+    <>
+      <div className="nodeupdateview desktop">
+        <div className="nodeupdateview-left">
+          <Input
+            className="nodeupdateview-left-input"
+            addonBefore={<ApartmentOutlined />}
+            bordered
+            maxLength={MAX_NODE_VALUE_CHAR_COUNT}
+            placeholder="Node Value"
+            value={inputValue}
+            onChange={handleInputChange}
+            onPressEnter={handlePressEnter}
+          />
+          <Button
+            className="nodeupdateview-left-compressed-item"
+            type="primary"
+            disabled={inputValue === ''}
+            onClick={handleEditNode}
+          >
+            Edit Node
+          </Button>
+          <Button
+            className="nodeupdateview-left-compressed-item danger"
+            type="primary"
+            onClick={handleDeleteNode}
+          >
+            Delete Node
+          </Button>
+        </div>
+        <div className="nodeupdateview-right">
+          <Button
+            className="nodeupdateview-right-item"
+            type="primary"
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
+        </div>
       </div>
-      <div className="overlay-right">
-        <Button
-          className="overlay-right-item"
-          type="primary"
-          onClick={handleCancel}
-        >
-          Cancel
-        </Button>
+      <div className="nodeupdateview mobile">
+        <div className="nodeupdateview-left">
+          <Input
+            className="nodeupdateview-left-input"
+            addonBefore={<ApartmentOutlined />}
+            bordered
+            maxLength={MAX_NODE_VALUE_CHAR_COUNT}
+            placeholder="Node Value"
+            value={inputValue}
+            onChange={handleInputChange}
+            onPressEnter={handlePressEnter}
+          />
+          <Button
+            className="nodeupdateview-left-compressed-item"
+            type="primary"
+            disabled={inputValue === ''}
+            onClick={handleEditNode}
+          >
+            Edit
+          </Button>
+          <Button
+            className="nodeupdateview-left-compressed-item danger"
+            type="primary"
+            onClick={handleDeleteNode}
+          >
+            Delete
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

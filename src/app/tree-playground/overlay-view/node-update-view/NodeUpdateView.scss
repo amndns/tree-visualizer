@@ -1,4 +1,4 @@
-.overlay {
+.nodeupdateview {
   display: flex;
   justify-content: space-between;
   position: absolute;
@@ -25,5 +25,23 @@
   &-right-item {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 8px 0px;
     margin-right: 20px;
+  }
+}
+
+.nodeupdateview.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .nodeupdateview.desktop {
+    display: none;
+  }
+
+  .nodeupdateview.mobile {
+    display: flex;
+  }
+
+  .nodeupdateview-left-input {
+    width: 110px;
   }
 }
