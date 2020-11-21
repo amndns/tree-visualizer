@@ -4,7 +4,7 @@ import addNodeVideo from 'assets/videos/tutorials/addNode.mp4';
 import deleteNodeVideo from 'assets/videos/tutorials/deleteNode.mp4';
 import deleteTreeVideo from 'assets/videos/tutorials/deleteTree.mp4';
 import editNodeVideo from 'assets/videos/tutorials/editNode.mp4';
-import saveTreeVideo from 'assets/videos/tutorials/saveTree.mp4';
+import copyTreeVideo from 'assets/videos/tutorials/copyTree.mp4';
 import traversalAlgorithmsVideo from 'assets/videos/tutorials/traversalAlgorithms.mp4';
 import visualizingAlgorithmsVideo from 'assets/videos/tutorials/visualizingAlgorithms.mp4';
 
@@ -78,23 +78,19 @@ const DELETE_NODE_CONTENT = (
   </div>
 );
 
-const SAVE_TREE_CONTENT = (
+const COPY_TREE_CONTENT = (
   <div className="tutorial-content">
     <ol>
-      <li>Click the save icon button on the top right corner of the screen.</li>
+      <li>Click the copy icon button on the top right corner of the screen.</li>
       <li>
-        Voila! The tree has been saved on your browser cache. A refresh would
-        not destroy your progress and delete the whole tree.
-      </li>
-      <li>
-        Note that a LeetCode version of the tree has also been copied to your
-        clipboard. You can directly paste it on any LeetCode tree problems.
+        Voila! A LeetCode version of the tree has been copied to your clipboard.
+        You can directly paste it on any of the LeetCode tree problems.
       </li>
     </ol>
     <div className="tutorial-content-video">
       <div className="tutorial-content-video-background" />
       <video key="save-tree" loop autoPlay muted height={CONTENT_VIDEO_HEIGHT}>
-        <source src={saveTreeVideo} type="video/mp4" />
+        <source src={copyTreeVideo} type="video/mp4" />
       </video>
     </div>
   </div>
@@ -210,8 +206,8 @@ export const TUTORIAL_CONTENT = [
     content: DELETE_NODE_CONTENT,
   },
   {
-    title: 'Save the Tree',
-    content: SAVE_TREE_CONTENT,
+    title: 'Copy the Tree',
+    content: COPY_TREE_CONTENT,
   },
   {
     title: 'Delete the Tree',
